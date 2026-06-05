@@ -1,0 +1,2882 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Maypure+ 신입교육 시험</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f8f8f8;color:#1a1a1a;font-size:15px;-webkit-tap-highlight-color:transparent;}
+.page{display:none;min-height:100vh;padding:1.5rem 1rem;}
+.page.on{display:block;}
+.wrap{max-width:500px;margin:0 auto;}
+.card{background:#fff;border-radius:14px;padding:1.25rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.07);}
+.logo{text-align:center;padding:1.5rem 0 1rem;}
+.logo-txt{font-size:26px;font-weight:600;letter-spacing:-.5px;}
+.logo-plus{color:#F5A623;}
+.logo-sub{font-size:13px;color:#999;margin-top:5px;}
+label{display:block;font-size:13px;color:#666;margin-bottom:5px;font-weight:500;}
+input,select,textarea{width:100%;padding:11px 14px;border:1.5px solid #e5e5e5;border-radius:10px;font-size:15px;background:#fff;color:#1a1a1a;outline:none;margin-bottom:1rem;-webkit-appearance:none;}
+input:focus,select:focus,textarea:focus{border-color:#534AB7;}
+textarea{resize:vertical;min-height:80px;margin-bottom:0;}
+.btn{width:100%;padding:14px;border-radius:12px;border:none;font-size:16px;font-weight:600;cursor:pointer;margin-bottom:8px;}
+.btn-p{background:#534AB7;color:#fff;}
+.btn-p:active{background:#3C3489;}
+.btn-g{background:#f0f0f0;color:#555;}
+.qcard{background:#fff;border-radius:14px;padding:1.25rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.07);}
+.qmeta{font-size:11px;color:#aaa;margin-bottom:8px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.qtxt{font-size:15px;font-weight:500;line-height:1.6;margin-bottom:1rem;color:#1a1a1a;}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border-radius:10px;border:1.5px solid #e5e5e5;margin-bottom:8px;cursor:pointer;font-size:14px;line-height:1.5;transition:all .1s;}
+.opt:active{opacity:.8;}
+.opt.sel{border-color:#534AB7;background:#F0EEFF;}
+.onum{flex-shrink:0;width:22px;height:22px;border-radius:50%;border:1.5px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:11px;color:#aaa;font-weight:500;}
+.opt.sel .onum{border-color:#534AB7;color:#534AB7;background:#e8e4ff;}
+.bx{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;}
+.bx-ok{background:#d4edda;color:#155724;}
+.bx-no{background:#f8d7da;color:#721c24;}
+.bx-sk{background:#e9ecef;color:#495057;}
+.bx-pn{background:#d0e8ff;color:#004085;}
+.bx-top{background:#f8d7da;color:#721c24;}
+.bx-hi{background:#fff3cd;color:#856404;}
+.bx-mid{background:#d0e8ff;color:#004085;}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.sv{background:#f8f8f8;border-radius:10px;padding:12px;}
+.sl{font-size:12px;color:#999;margin-bottom:3px;}
+.sn{font-size:20px;font-weight:600;}
+.prog{width:100%;height:5px;background:#eee;border-radius:3px;margin-bottom:1rem;}
+.pf{height:100%;background:#534AB7;border-radius:3px;transition:width .3s;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;}
+.tmr{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;padding:8px 14px;border-radius:10px;background:#f0f0f0;}
+.tmr.warn{background:#FFF3CD;color:#856404;}
+.tab-bar{display:flex;gap:2px;border-bottom:1.5px solid #eee;margin-bottom:1rem;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.tab{padding:9px 14px;font-size:13px;cursor:pointer;color:#aaa;border-bottom:2px solid transparent;white-space:nowrap;font-weight:500;}
+.tab.on{color:#534AB7;border-bottom-color:#534AB7;}
+.tc{display:none;}.tc.on{display:block;}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.tbl th{padding:7px 8px;text-align:left;color:#999;font-weight:500;border-bottom:1px solid #f0f0f0;}
+.tbl td{padding:7px 8px;border-bottom:1px solid #f8f8f8;}
+.br{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12px;}
+.bg{flex:1;height:12px;background:#f0f0f0;border-radius:3px;overflow:hidden;}
+.bf{height:100%;background:#AFA9EC;border-radius:3px;}
+.bf.r{background:#F09595;}
+.ri{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:13px;}
+.un-panel{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #534AB7;padding:12px 1rem;z-index:100;box-shadow:0 -4px 16px rgba(0,0,0,.1);}
+.un-btn{display:inline-block;padding:5px 10px;margin:2px;font-size:12px;border-radius:8px;border:1px solid #F09595;background:#fde8e8;color:#7f1d1d;cursor:pointer;}
+.pin-wrap{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;padding:1rem;}
+.pin-box{background:#fff;border-radius:16px;padding:1.5rem;width:100%;max-width:320px;}
+.admin-btn{display:block;text-align:center;margin-top:1.5rem;color:#ccc;font-size:12px;cursor:pointer;padding:8px;}
+.sec-t{font-size:11px;font-weight:600;color:#999;letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<!-- 시작 화면 -->
+<div id="pg0" class="page on">
+<div class="wrap">
+  <div class="logo">
+    <div class="logo-txt">Maypure<span class="logo-plus">+</span></div>
+    <div class="logo-sub">신입교육 시험 · 전범위 200문항 · 120분</div>
+  </div>
+  <div class="card">
+    <label>이름</label>
+    <input id="nm" type="text" placeholder="홍길동">
+    <label>입사일</label>
+    <input id="dt" type="date">
+    <label>이메일 (결과 수신용)</label>
+    <input id="em" type="email" placeholder="example@maypure.com" style="margin-bottom:0;">
+  </div>
+  <button class="btn btn-p" onclick="startExam()">시험 시작</button>
+  <p style="text-align:center;font-size:12px;color:#bbb;margin-top:.5rem;">결과는 관리자 확인 후 이메일로 발송됩니다</p>
+  <div class="admin-btn" onclick="openPin()">관리자</div>
+</div>
+</div>
+
+<!-- 시험 화면 -->
+<div id="pg1" class="page">
+<div class="wrap">
+  <div class="topbar">
+    <div id="enm" style="font-size:14px;font-weight:500;"></div>
+    <div class="tmr" id="tmr">⏱ <span id="td">120:00</span></div>
+  </div>
+  <div class="prog"><div class="pf" id="pf" style="width:0%"></div></div>
+  <div id="qcon"></div>
+  <button class="btn btn-p" style="margin-top:4px;margin-bottom:4rem;" onclick="trySubmit()">제출하기</button>
+</div>
+</div>
+
+<!-- 결과 화면 -->
+<div id="pg2" class="page">
+<div class="wrap">
+  <div style="text-align:center;margin-bottom:1.25rem;padding-top:.5rem;">
+    <div style="font-size:20px;font-weight:600;" id="rn"></div>
+    <div style="font-size:12px;color:#999;margin-top:4px;" id="rm"></div>
+  </div>
+  <div class="sg">
+    <div class="sv"><div class="sl">점수</div><div class="sn" id="rsc"></div></div>
+    <div class="sv"><div class="sl">정답</div><div class="sn" id="rco" style="color:#155724;"></div></div>
+    <div class="sv"><div class="sl">오답</div><div class="sn" id="rwr" style="color:#721c24;"></div></div>
+  </div>
+  <div class="card">
+    <div class="sec-t">문항별 결과</div>
+    <div id="rl"></div>
+    <div style="margin-top:10px;padding:10px;background:#f8f8f8;border-radius:10px;font-size:12px;color:#999;">서술형은 관리자 검토 후 최종 점수가 확정되며 이메일로 발송됩니다.</div>
+  </div>
+  <button class="btn btn-g" onclick="goHome()">처음으로</button>
+</div>
+</div>
+
+<!-- 관리자 대시보드 -->
+<div id="pg3" class="page" style="background:#f8f8f8;">
+<div class="wrap" style="max-width:600px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-top:.5rem;">
+    <div style="font-size:17px;font-weight:600;">관리자 대시보드</div>
+    <button class="btn btn-g" style="width:auto;padding:8px 16px;font-size:13px;margin:0;" onclick="goHome()">나가기</button>
+  </div>
+  <div class="tab-bar">
+    <div class="tab on" onclick="swTab('ta',this)">현황</div>
+    <div class="tab" onclick="swTab('tb',this)">기수별</div>
+    <div class="tab" onclick="swTab('tc',this)">오답순위</div>
+    <div class="tab" onclick="swTab('td',this)">분포</div>
+    <div class="tab" onclick="swTab('te',this)">발송</div>
+    <div class="tab" onclick="swTab('tf',this)">풀이지</div>
+  </div>
+  <div id="ta" class="tc on">
+    <div class="sg" id="ast" style="grid-template-columns:repeat(2,1fr);"></div>
+    <div class="card">
+      <div class="sec-t">응시 기록</div>
+      <div style="overflow-x:auto;">
+        <table class="tbl">
+          <thead><tr><th>이름</th><th>점수</th><th>입사일</th><th>이메일</th><th>응시일시</th><th>답지</th><th>삭제</th></tr></thead>
+          <tbody id="rtb"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="tb" class="tc">
+    <div class="card">
+      <div class="sec-t">기수 선택</div>
+      <select id="csel" onchange="rCohort()" style="margin-bottom:1rem;"><option value="">기수 선택</option></select>
+      <div id="cdet"></div>
+    </div>
+  </div>
+  <div id="tc" class="tc">
+    <div class="card">
+      <div class="sec-t">오답률 높은 문항 (상위 15개)</div>
+      <div id="wrl"></div>
+    </div>
+  </div>
+  <div id="td" class="tc">
+    <div class="card">
+      <div class="sec-t">점수 분포</div>
+      <div id="dist"></div>
+    </div>
+  </div>
+  <div id="te" class="tc">
+    <div class="card">
+      <div class="sec-t">결과 발송</div>
+      <div style="font-size:12px;color:#999;margin-bottom:1rem;padding:8px 10px;background:#f8f8f8;border-radius:10px;">맞음/틀림 결과만 발송됩니다. 정답은 포함되지 않습니다.</div>
+      <div id="sndlist"></div>
+      <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+        <button class="btn btn-p" style="width:auto;padding:10px 18px;margin:0;font-size:14px;" onclick="doSend()">선택 발송</button>
+        <button class="btn btn-g" style="width:auto;padding:10px 14px;margin:0;font-size:13px;" onclick="selAll(1)">전체선택</button>
+        <button class="btn btn-g" style="width:auto;padding:10px 14px;margin:0;font-size:13px;" onclick="selAll(0)">전체해제</button>
+      </div>
+      <div id="sndres" style="font-size:12px;color:#534AB7;margin-top:10px;"></div>
+    </div>
+  </div>
+  <div id="tf" class="tc">
+    <div style="display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;">
+      <select id="akch" onchange="rAK()" style="margin:0;flex:1;min-width:120px;"><option value="">전체 챕터</option></select>
+      <select id="akty" onchange="rAK()" style="margin:0;width:90px;"><option value="">유형</option><option value="mc">객관식</option><option value="short">단답</option><option value="essay">서술</option></select>
+      <select id="akdf" onchange="rAK()" style="margin:0;width:90px;"><option value="">난이도</option><option value="중상">중상</option><option value="상">상</option><option value="최상">최상</option></select>
+    </div>
+    <div id="akl"></div>
+  </div>
+</div>
+</div>
+
+<!-- PIN 오버레이 -->
+<div class="pin-wrap" id="pinwrap">
+  <div class="pin-box">
+    <div style="font-size:16px;font-weight:600;margin-bottom:4px;">관리자 접근</div>
+    <div style="font-size:13px;color:#999;margin-bottom:1rem;">PIN을 입력하세요</div>
+    <input type="password" id="pi" placeholder="••••" style="margin-bottom:10px;" onkeydown="if(event.key==='Enter')checkPin()">
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-p" style="margin:0;flex:1;padding:12px;" onclick="checkPin()">확인</button>
+      <button class="btn btn-g" style="margin:0;flex:1;padding:12px;" onclick="closePin()">취소</button>
+    </div>
+    <div id="pe" style="font-size:12px;color:#dc3545;margin-top:8px;display:none;">PIN이 올바르지 않습니다.</div>
+  </div>
+</div>
+
+<script>
+const PIN='9999';
+const GAS='https://script.google.com/macros/s/AKfycbyor1J9j60UL4EDlEhfWWspdaHHswXlYAutk2NUY5qxlGsl9xD84fAJ_GZsGl89xW8/exec';
+let tmrI=null,tLeft=7200,cu={},_recs=[];
+
+function $(id){return document.getElementById(id);}
+function show(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));$(id).classList.add('on');window.scrollTo(0,0);}
+function getCL(d){if(!d)return '미입력';return d+' 입사';}
+
+// PIN
+function openPin(){$('pinwrap').style.display='flex';$('pi').value='';$('pe').style.display='none';setTimeout(()=>$('pi').focus(),100);}
+function closePin(){$('pinwrap').style.display='none';}
+function checkPin(){if($('pi').value===PIN){closePin();goAdmin();}else $('pe').style.display='block';}
+
+// 문항 데이터
+const QS = [
+
+// ===================== 목차 1: 레이저 공통 (10문항) =====================
+{id:1,type:'mc',ch:'레이저 공통',dif:'중상',
+text:'레이저 시술 준비 전 반드시 확인해야 할 사항으로 옳은 것은?',
+opts:['기계 전원 상태만 확인한다','고객 이름과 차트를 반드시 확인한다','시술 부위 사진만 확인한다','예약 시간만 확인한다'],
+ans:1,
+exp:'준비 전 고객 이름과 차트 확인은 필수 공통 확인사항입니다.',
+cri:'②번 선택'},
+
+{id:2,type:'mc',ch:'레이저 공통',dif:'중상',
+text:'레이저 연달아 시술 시 기계 운용 방식으로 올바른 것은?',
+opts:['반드시 기계를 껐다 켜야 한다','기계를 끄지 않고 그대로 연속 사용할 수 있다','10분 이상 대기 후 재가동해야 한다','원장 지시가 있을 때만 연속 사용 가능하다'],
+ans:1,
+exp:'레이저 연달아 시술 시 기계를 껐다 켜는 절차는 생략 가능합니다.',
+cri:'②번 선택'},
+
+{id:3,type:'mc',ch:'레이저 공통',dif:'상',
+text:'피코기기, 클라리티, 덴서티의 전원 관리 규칙이 다른 기기와 구별되는 이유로 가장 적절한 것은?',
+opts:['해당 기기들은 워밍업 시간이 필요하기 때문이다','교대 단위로 ON/OFF를 관리하여 장비 수명과 에너지를 효율적으로 관리하기 위함이다','원장이 직접 조작해야 하는 기기이기 때문이다','냉각 시스템이 없어 과열 방지가 필요하기 때문이다'],
+ans:1,
+exp:'피코기기·클라리티·덴서티는 1교대 오픈 시 ON, 2교대 마감 시 OFF로 관리하며 이는 장비 효율 관리 목적입니다.',
+cri:'②번 선택 및 교대 관리 이유 언급'},
+
+{id:4,type:'mc',ch:'레이저 공통',dif:'중상',
+text:'레이저 시술 후 고객에게 자제를 안내해야 하는 행동으로 묶인 것 중 옳지 않은 것은?',
+opts:['사우나·수영장·찜질방·스크럽·음주·흡연 — 1주일 자제','세안·메이크업 — 당일 가능','재생크림·선크림 도포 — 권장','냉찜질·아이스팩 — 즉시 적용 권장'],
+ans:3,
+exp:'냉찜질·아이스팩 즉시 적용은 공통 주의사항에 포함되지 않습니다. 열감·붉음증은 자연 완화를 기다리고 재생크림·선크림 도포를 안내합니다.',
+cri:'④번 선택'},
+
+{id:5,type:'mc',ch:'레이저 공통',dif:'상',
+text:'레이저 시술 후 발생할 수 있는 공통 반응을 모두 포함한 것은?',
+opts:['열감, 붉음증, 건조감, 알러지 반응','열감, 출혈, 화농, 괴사','붉음증, 색소침착, 탈모, 흉터','건조감, 알러지, 구토, 발열'],
+ans:0,
+exp:'공통 주의사항에서 열감·붉음증·건조감·알러지 반응이 동반될 수 있다고 명시합니다.',
+cri:'①번 선택'},
+
+{id:6,type:'mc',ch:'레이저 공통',dif:'최상',
+text:'다음 중 레이저 공통 확인사항과 주의사항을 모두 올바르게 설명한 것은?',
+opts:[
+'준비 전 차트 확인 필수 / 레이저+관리 시 수딩겔 생략 후 관리실 안내 / 피코·클라리티·덴서티는 교대 기준 ON·OFF',
+'준비 전 차트 확인 필수 / 레이저+관리 시 수딩겔 도포 후 관리실 안내 / 피코·클라리티·덴서티는 매 시술마다 ON·OFF',
+'고객 이름 확인 불필요 / 레이저+관리 시 수딩겔 생략 / 모든 기기 교대 기준 ON·OFF',
+'준비 전 차트 확인 필수 / 연속 시술 시 반드시 ON·OFF / 사우나는 3일 자제'
+],
+ans:0,
+exp:'①이 세 가지 공통 확인사항을 모두 정확히 서술합니다.',
+cri:'①번 선택 및 세 가지 항목 모두 정확히 기술'},
+
+{id:7,type:'mc',ch:'레이저 공통',dif:'중상',
+text:'레이저 시술 당일 고객이 할 수 있는 것은?',
+opts:['사우나','스크럽','세안 및 메이크업','음주'],
+ans:2,
+exp:'당일 세안 및 메이크업은 가능합니다. 사우나·스크럽·음주는 1주일간 자제 안내 대상입니다.',
+cri:'③번 선택'},
+
+{id:8,type:'mc',ch:'레이저 공통',dif:'상',
+text:'레이저+관리가 동시에 예약된 고객의 레이저 마무리 절차에서 달라지는 점은?',
+opts:['눈가리개를 제거하지 않는다','수딩겔 도포를 생략하고 바로 관리실로 안내한다','기기를 끄지 않고 관리실로 안내한다','터번을 착용한 채로 관리실로 이동한다'],
+ans:1,
+exp:'레이저+관리 시 수딩겔 도포를 생략하고 바로 관리실로 안내합니다. 다른 관리 제품과 밀릴 수 있기 때문입니다.',
+cri:'②번 선택'},
+
+{id:9,type:'short',ch:'레이저 공통',dif:'중상',
+text:'레이저 시술 후 고객에게 자제를 안내하는 행동 6가지를 모두 쓰시오.',
+ans:['사우나','수영장','찜질방','스크럽','음주','흡연'],
+exp:'사우나·수영장·찜질방·스크럽·음주·흡연 6가지를 1주일간 자제 안내합니다.',
+cri:'6가지 모두 기재 시 만점 / 4~5가지 부분점수 / 3가지 이하 오답'},
+
+{id:10,type:'essay',ch:'레이저 공통',dif:'최상',
+text:'레이저 시술 직후 고객이 "오늘 저녁에 친구들이랑 찜질방 가도 되나요?"라고 물었다. 적절한 안내 멘트와 그 이유를 서술하시오.',
+ans:['1주일','자제','열감','붉음증'],
+exp:'시술 후 열감·붉음증 등의 반응이 있을 수 있으며 찜질방은 1주일간 자제를 안내합니다. "시술 후 열감이나 붉음증이 생길 수 있어 찜질방은 1주일간 자제해 주세요."',
+cri:'자제 기간(1주일) + 이유(열감·붉음증 등 반응) + 안내 멘트 포함 시 만점'},
+
+// ===================== 목차 2: 마무리 제품 (10문항) =====================
+{id:11,type:'mc',ch:'마무리 제품',dif:'중상',
+text:'수딩겔의 주요 성분과 용도로 올바른 것은?',
+opts:['스테로이드 성분 / 제모 마무리 시 사용','히알루론산 성분 / 기본 레이저 마무리 시 사용','재생 습윤 성분 / CO2 마무리 시 사용','항생제 성분 / 상처 감염 방지용'],
+ans:1,
+exp:'수딩겔은 히알루론산 성분의 보습·진정 겔로 기본 레이저 마무리 시 사용합니다.',
+cri:'②번 선택'},
+
+{id:12,type:'mc',ch:'마무리 제품',dif:'상',
+text:'하티손을 원장 오더 없이 사용할 수 있는 유일한 시술은?',
+opts:['CO2 레이저','피코토닝','제모','MLA토닝'],
+ans:2,
+exp:'하티손은 제모 마무리 시 사용하며, 그 외에는 원장님 오더가 있는 경우에만 사용합니다.',
+cri:'③번 선택'},
+
+{id:13,type:'mc',ch:'마무리 제품',dif:'중상',
+text:'듀오덤의 역할로 가장 정확한 것은?',
+opts:['보습과 진정을 동시에 제공하는 겔','상처 부위 재생과 흉터 최소화를 돕는 재생 습윤 밴드','스테로이드 성분으로 염증을 억제하는 크림','모낭 파괴 후 피부를 진정시키는 쿨링 제품'],
+ans:1,
+exp:'듀오덤은 상처 부위 재생과 흉터 최소화를 돕는 재생 습윤 밴드입니다.',
+cri:'②번 선택'},
+
+{id:14,type:'mc',ch:'마무리 제품',dif:'상',
+text:'안연고를 사용해야 하는 상황 두 가지를 모두 포함한 것은?',
+opts:['눈가 주변 시술 시 / 듀오덤 알러지가 있는 경우','피코토닝 마무리 시 / CO2 마무리 시','532 시술 후 항상 / 문신제거 후 항상','하티손 알러지 시 / 스킨부스터 마무리 시'],
+ans:0,
+exp:'안연고는 듀오덤 부착 시술 중 눈가 주변 시술 또는 듀오덤 알러지가 있는 경우 듀오덤 대체제로 사용합니다.',
+cri:'①번 선택'},
+
+{id:15,type:'mc',ch:'마무리 제품',dif:'최상',
+text:'다음 시술 목록에서 듀오덤을 사용하는 것과 수딩겔을 사용하는 것을 올바르게 분류한 것은?',
+opts:[
+'듀오덤: 532·문신제거·CO2·필러 펑처 / 수딩겔: 피코토닝·MLA토닝·카프리',
+'듀오덤: 피코토닝·MLA토닝 / 수딩겔: 532·CO2·카프리',
+'듀오덤: 532·피코토닝·CO2 / 수딩겔: 문신제거·카프리·MLA토닝',
+'듀오덤: 문신제거·카프리·MLA토닝 / 수딩겔: 532·CO2·필러 펑처'
+],
+ans:0,
+exp:'듀오덤: 532·문신제거·CO2·필러 펑처 자리 / 수딩겔: 피코토닝·MLA토닝·카프리·콜라겐토닝·FX 등 기본 레이저.',
+cri:'①번 선택, 두 그룹 모두 정확히 분류'},
+
+{id:16,type:'mc',ch:'마무리 제품',dif:'중상',
+text:'듀오덤 부착 후 고객에게 안내하는 교체 주기로 올바른 것은?',
+opts:['1~2일에 한 번','3~4일에 한 번','매일 교체','진물이 나오면 즉시 교체'],
+ans:1,
+exp:'듀오덤은 7~10일간 부착하며 3~4일에 한 번 정도 교체합니다. 진물 때문에 교체할 필요는 없습니다.',
+cri:'②번 선택'},
+
+{id:17,type:'mc',ch:'마무리 제품',dif:'상',
+text:'안연고 사용 후 고객 안내사항으로 모두 옳은 것은?',
+opts:[
+'하루 3회 이상 도포 / 시술 후 24시간 물기 닿지 않도록 / 7~10일간 사용',
+'하루 1회 도포 / 시술 후 48시간 물기 닿지 않도록 / 5~7일간 사용',
+'하루 3회 이상 도포 / 시술 당일 세안 가능 / 3~5일간 사용',
+'하루 2회 도포 / 시술 후 12시간 물기 닿지 않도록 / 7~10일간 사용'
+],
+ans:0,
+exp:'안연고는 7~10일간 하루 3회 이상 도포, 시술 후 24시간 동안 물기에 닿지 않도록 안내합니다.',
+cri:'①번 선택'},
+
+{id:18,type:'mc',ch:'마무리 제품',dif:'중상',
+text:'하티손의 성분 계열로 옳은 것은?',
+opts:['히알루론산','항생제','순한 스테로이드','레티놀'],
+ans:2,
+exp:'하티손은 순한 스테로이드 성분의 진정 연고/크림입니다.',
+cri:'③번 선택'},
+
+{id:19,type:'short',ch:'마무리 제품',dif:'중상',
+text:'듀오덤을 사용하는 시술 4가지를 쓰시오.',
+ans:['532','문신제거','CO2','필러 펑처'],
+exp:'듀오덤은 532, 문신제거, CO2, 필러 펑처 자리 마무리 시 사용합니다.',
+cri:'4가지 모두 기재 시 만점 / 3가지 부분점수'},
+
+{id:20,type:'essay',ch:'마무리 제품',dif:'최상',
+text:'고객이 듀오덤을 붙이고 귀가했는데 다음날 "진물이 많이 나오는데 교체해야 하나요?"라고 문의했다. 적절한 안내 내용을 멘트 형식으로 서술하시오.',
+ans:['진물','교체 필요 없','3~4일','7~10일'],
+exp:'"진물 때문에 교체하실 필요는 없으세요. 3~4일에 한 번 정도 교체하시면 되고, 7~10일간 부착하신 후 완전히 제거하시면 됩니다."',
+cri:'진물로 인한 교체 불필요 + 3~4일 교체 주기 + 7~10일 총 부착기간 포함 시 만점'},
+
+// ===================== 목차 3: 준비/마무리 프로토콜 (10문항) =====================
+{id:21,type:'mc',ch:'준비/마무리 프로토콜',dif:'중상',
+text:'기본 레이저 시술의 준비 순서로 올바른 것은?',
+opts:[
+'세안 → 베드 눕힘 → 기계 ON → 터번 → 눈가리개 → 차트 ON',
+'베드 눕힘 → 세안 → 기계 ON → 터번 → 눈가리개 → 차트 ON',
+'세안 → 기계 ON → 베드 눕힘 → 눈가리개 → 터번 → 차트 ON',
+'세안 → 베드 눕힘 → 터번 → 기계 ON → 눈가리개 → 차트 ON'
+],
+ans:0,
+exp:'기본 레이저 준비: ①세안 → ②베드 눕힘 → ③기계 ON → ④터번 → ⑤눈가리개 → ⑥차트 ON',
+cri:'①번 선택'},
+
+{id:22,type:'mc',ch:'준비/마무리 프로토콜',dif:'중상',
+text:'기본 레이저 마무리 순서로 올바른 것은?',
+opts:[
+'기기 OFF → 눈가리개 제거 → 수딩겔 도포 → 터번 제거',
+'눈가리개 제거 → 기기 OFF → 터번 제거 → 수딩겔 도포',
+'기기 OFF → 수딩겔 도포 → 눈가리개 제거 → 터번 제거',
+'터번 제거 → 눈가리개 제거 → 기기 OFF → 수딩겔 도포'
+],
+ans:0,
+exp:'기본 레이저 마무리: ①기기 OFF → ②눈가리개 제거 → ③수딩겔 도포 → ④터번 제거',
+cri:'①번 선택'},
+
+{id:23,type:'mc',ch:'준비/마무리 프로토콜',dif:'상',
+text:'넓은 부위/전체 마취 시술의 마취 세안 안내 멘트로 올바른 것은?',
+opts:[
+'"랩 떼고, 마취 크림 티슈로 닦아낸 후, 물세안 해주세요."',
+'"랩 그대로 두고 시술실로 들어오세요."',
+'"마취 크림은 물로 씻으시면 안 됩니다."',
+'"랩을 떼고 바로 시술실로 오세요."'
+],
+ans:0,
+exp:'마취 세안 멘트: "랩 떼고, 마취 크림 티슈로 닦아낸 후, 물세안 해주세요."',
+cri:'①번 선택'},
+
+{id:24,type:'mc',ch:'준비/마무리 프로토콜',dif:'상',
+text:'개수별 마취 시술에서 화이트펜슬 재체크 시 사용하는 도구는?',
+opts:['일반 거울','태블릿 PC','스마트폰 카메라','육안으로만 확인'],
+ans:1,
+exp:'개수별 마취 시술에서 위치 촬영 및 화이트펜슬 재체크는 태블릿 PC를 사용합니다.',
+cri:'②번 선택'},
+
+{id:25,type:'mc',ch:'준비/마무리 프로토콜',dif:'최상',
+text:'개수별 마취 마무리 절차를 올바르게 나열한 것은?',
+opts:[
+'기기 OFF → 눈가리개 제거 → 위치/개수 확인(태블릿PC) → 소독 및 듀오덤/안연고 마무리',
+'눈가리개 제거 → 기기 OFF → 소독 → 위치 확인 → 듀오덤 부착',
+'기기 OFF → 소독 → 위치 확인 → 눈가리개 제거 → 듀오덤 부착',
+'위치 확인 → 기기 OFF → 눈가리개 제거 → 소독 → 듀오덤 부착'
+],
+ans:0,
+exp:'개수별 마취 마무리: ①기기 OFF → ②눈가리개 제거 → ③위치/개수 확인(태블릿PC) → ④소독(얼굴-보릭솜, 바디-알코올솜) 및 듀오덤/안연고 마무리',
+cri:'①번 선택'},
+
+{id:26,type:'mc',ch:'준비/마무리 프로토콜',dif:'중상',
+text:'제모 시술 준비 및 마무리 단계에서 추가되는 절차는?',
+opts:['마취크림 도포','시술 부위 소독','수딩겔 도포','드레싱 밧드 세팅'],
+ans:1,
+exp:'제모 준비/마무리 단계에서는 시술 부위 소독이 추가됩니다.',
+cri:'②번 선택'},
+
+{id:27,type:'mc',ch:'준비/마무리 프로토콜',dif:'상',
+text:'포마, 슈링크 시술 시 사용하는 준비물로 올바른 것은?',
+opts:['덴서티 전용 겔+붓','상온 초음파 겔+붓','드레싱 밧드','생리식염수+보릭솜'],
+ans:1,
+exp:'포마·슈링크 시술 시 상온 초음파 겔+붓을 사용합니다. 덴서티 전용 겔+붓은 덴서티에 사용합니다.',
+cri:'②번 선택'},
+
+{id:28,type:'mc',ch:'준비/마무리 프로토콜',dif:'중상',
+text:'기본 레이저 마무리 후 고객에게 전달하는 앰플 흡수 안내 멘트로 옳은 것은?',
+opts:[
+'"앰플 발라 드릴게요. 3~5분간 두드려 흡수 후 데스크에 있는 재생크림/선크림 발라주세요."',
+'"앰플 바르고 바로 선크림 발라주세요."',
+'"앰플은 집에서 바르시면 됩니다."',
+'"앰플 발라 드릴게요. 10분 후 세안해주세요."'
+],
+ans:0,
+exp:'마무리 후 앰플 안내 멘트: "앰플 발라 드릴게요. 3~5분간 두드려 흡수 후 데스크에 있는 재생크림/선크림 발라주세요."',
+cri:'①번 선택'},
+
+{id:29,type:'short',ch:'준비/마무리 프로토콜',dif:'중상',
+text:'개수별 마취 시술의 기본 준비물 3가지를 쓰시오.',
+ans:['생리식염수','보릭솜','긴면봉'],
+exp:'개수별 마취 기본 준비물: 드레싱 밧드(생리식염수, 보릭솜/알코올솜, 긴면봉)',
+cri:'3가지 모두 기재 시 만점'},
+
+{id:30,type:'essay',ch:'준비/마무리 프로토콜',dif:'최상',
+text:'넓은 부위/전체 마취 시술과 개수별 마취 시술의 대기실 준비 절차 차이를 비교하여 서술하시오.',
+ans:['페이스랩','화이트펜슬','태블릿','3M'],
+exp:'전체 마취: 세안→마취크림 도포→페이스랩 부착→마취 세안 안내 / 개수별 마취: 위치 촬영(태블릿PC)→마취 도포→3M 테이프/랩 부착. 전체 마취는 페이스랩 전체 부착, 개수별은 병변 위치를 먼저 촬영하고 3M 테이프로 국소 부착하는 차이가 있습니다.',
+cri:'두 방식의 절차 차이 + 페이스랩vs3M 테이프 구분 + 태블릿PC 촬영 언급 시 만점'},
+
+// ===================== 목차 4: 피부의 구조·레이저 파장 (10문항) =====================
+{id:31,type:'mc',ch:'피부의 구조·레이저 파장',dif:'중상',
+text:'피부 층 구조를 표면에서 깊이 순으로 올바르게 나열한 것은?',
+opts:[
+'표피 → 진피 → 피하지방 → 근막 → 근육',
+'진피 → 표피 → 피하지방 → 근막 → 근육',
+'표피 → 피하지방 → 진피 → 근막 → 근육',
+'표피 → 진피 → 근막 → 피하지방 → 근육'
+],
+ans:0,
+exp:'피부 구조는 표피→진피→피하지방→근막→근육 순서입니다.',
+cri:'①번 선택'},
+
+{id:32,type:'mc',ch:'피부의 구조·레이저 파장',dif:'중상',
+text:'KTP 레이저의 파장(nm)으로 옳은 것은?',
+opts:['755nm','1064nm','532nm','10600nm'],
+ans:2,
+exp:'KTP 레이저의 파장은 532nm입니다.',
+cri:'③번 선택'},
+
+{id:33,type:'mc',ch:'피부의 구조·레이저 파장',dif:'상',
+text:'CO2 레이저의 파장과 주요 작용 원리로 옳은 것은?',
+opts:[
+'10,600nm / 피부 조직 내 수분에 흡수되어 기화·절제',
+'1,064nm / 멜라닌에 흡수되어 색소 분해',
+'755nm / 모낭 멜라닌에 흡수되어 모낭 파괴',
+'532nm / 표피층 색소에 선택적 반응'
+],
+ans:0,
+exp:'CO2 레이저는 10,600nm 파장으로 피부 조직 내 수분에 흡수되어 조직을 기화·절제합니다.',
+cri:'①번 선택'},
+
+{id:34,type:'mc',ch:'피부의 구조·레이저 파장',dif:'상',
+text:'Nd:YAG 레이저의 파장과 주요 타깃 피부층으로 옳은 것은?',
+opts:[
+'1,064nm / 진피층 멜라닌',
+'532nm / 표피층 색소',
+'755nm / 모낭',
+'1,550nm / 진피층 콜라겐'
+],
+ans:0,
+exp:'Nd:YAG 레이저는 1,064nm 파장으로 진피층 멜라닌이 주요 타깃입니다.',
+cri:'①번 선택'},
+
+{id:35,type:'mc',ch:'피부의 구조·레이저 파장',dif:'최상',
+text:'파장 755nm를 사용하는 레이저 기기와 그 주요 타깃을 올바르게 짝지은 것은?',
+opts:[
+'클라리티Ⅱ (알렉산드라이트) / 표피층 멜라닌 색소, 모낭',
+'피코케어 / 진피층 멜라닌',
+'DSE CO2 / 피부 표면 조직',
+'인모드 / 진피층 피하지방'
+],
+ans:0,
+exp:'755nm는 알렉산드라이트 파장으로 클라리티Ⅱ에서 사용하며, 표피층 멜라닌 색소 및 모낭을 타깃으로 합니다.',
+cri:'①번 선택'},
+
+{id:36,type:'mc',ch:'피부의 구조·레이저 파장',dif:'중상',
+text:'다음 중 가장 긴 파장을 가진 레이저는?',
+opts:['Ruby 694nm','Nd:YAG 1,064nm','CO2 10,600nm','Er:YAG 2,940nm'],
+ans:2,
+exp:'CO2 레이저의 파장은 10,600nm로 제시된 레이저 중 가장 깁니다.',
+cri:'③번 선택'},
+
+{id:37,type:'mc',ch:'피부의 구조·레이저 파장',dif:'상',
+text:'Er:Glass 레이저의 파장으로 옳은 것은?',
+opts:['694nm','1,064nm','1,550nm','2,940nm'],
+ans:2,
+exp:'Er:Glass 레이저의 파장은 1,550nm입니다.',
+cri:'③번 선택'},
+
+{id:38,type:'mc',ch:'피부의 구조·레이저 파장',dif:'상',
+text:'피부 깊은 진피층까지 도달하는 레이저 파장대로 가장 적절한 것은?',
+opts:['532nm (표피층)','755nm (표피~진피 상부)','1,064nm (진피층)','모든 파장은 동일하게 침투한다'],
+ans:2,
+exp:'1,064nm Nd:YAG는 진피층까지 침투하며 기미·오타모반 등 진피층 색소에 효과적입니다.',
+cri:'③번 선택'},
+
+{id:39,type:'short',ch:'피부의 구조·레이저 파장',dif:'중상',
+text:'532nm 파장의 주요 타깃 색소 병변 4가지를 쓰시오.',
+ans:['잡티','주근깨','검버섯','일광흑자'],
+exp:'532nm는 표피층 색소(잡티·주근깨·검버섯·일광흑자·밀크커피반점)와 문신제거(붉은색)에 사용됩니다.',
+cri:'4가지 이상 기재 시 만점'},
+
+{id:40,type:'essay',ch:'피부의 구조·레이저 파장',dif:'최상',
+text:'레이저 파장 길이와 피부 침투 깊이의 관계를 설명하고, 532nm와 1,064nm를 각각 어떤 증상에 사용하는지 비교하여 서술하시오.',
+ans:['파장','침투','532','표피','1064','진피'],
+exp:'일반적으로 파장이 길수록 피부 더 깊은 층까지 침투합니다. 532nm는 표피층 색소(잡티·주근깨·검버섯)에, 1,064nm는 진피층 멜라닌(기미·오타모반·ABNOM)에 사용됩니다.',
+cri:'파장-침투 깊이 관계 + 532nm 표피층 적응증 + 1,064nm 진피층 적응증 포함 시 만점'},
+
+// ===================== 목차 5: 피코·색소 레이저 (10문항) =====================
+{id:41,type:'mc',ch:'피코·색소 레이저',dif:'중상',
+text:'피코초(picosecond) 레이저와 나노초(nanosecond) 레이저의 펄스폭 차이로 옳은 것은?',
+opts:[
+'1ns = 1/10억 초 / 1ps = 1/1조 초로 피코가 더 짧다',
+'1ns = 1/1조 초 / 1ps = 1/10억 초로 나노가 더 짧다',
+'두 레이저의 펄스폭은 동일하다',
+'피코는 나노보다 에너지가 낮다'
+],
+ans:0,
+exp:'1ns=1/10억 초, 1ps=1/1조 초. 1ns=1,000ps이므로 피코초가 더 짧아 피부 손상과 통증이 적습니다.',
+cri:'①번 선택'},
+
+{id:42,type:'mc',ch:'피코·색소 레이저',dif:'상',
+text:'PICOCARE 450의 파장 구성으로 옳은 것은?',
+opts:[
+'1,064nm, 532nm',
+'1,064nm, 532nm, 595nm, 660nm',
+'755nm, 1,064nm',
+'532nm, 694nm'
+],
+ans:1,
+exp:'PICOCARE 450은 1,064nm, 532nm에 추가로 595nm, 660nm 파장을 포함합니다.',
+cri:'②번 선택'},
+
+{id:43,type:'mc',ch:'피코·색소 레이저',dif:'중상',
+text:'532 레이저 시술 후 나타나는 반응의 순서로 올바른 것은?',
+opts:[
+'흰 딱지 → 갈색의 얇은 딱지 → 약 7일 전후 탈락 → 붉은 자국 3~6개월 지속',
+'갈색 딱지 → 흰 딱지 → 2~3일 탈락 → 자국 없음',
+'즉시 색소 소실 → 붉은 자국 → 1개월 내 완전 회복',
+'흰 딱지 → 바로 탈락 → 색소 재발 없음'
+],
+ans:0,
+exp:'532 시술 후 반응: 흰 딱지→갈색의 얇은 딱지, 약 7일 전후 탈락, 붉은 자국 3~6개월 지속.',
+cri:'①번 선택'},
+
+{id:44,type:'mc',ch:'피코·색소 레이저',dif:'상',
+text:'피코토닝의 주요 타깃과 효과로 옳은 것은?',
+opts:[
+'진피층 멜라닌 덩어리를 분해하여 색소 완화 / 완치·화이트닝 개념 아님',
+'표피층 색소를 딱지로 만들어 제거 / 완치 가능',
+'모낭을 파괴하여 영구 제모 / 10회 이상 필요',
+'콜라겐 재생을 유도하여 탄력 개선 / 완치 가능'
+],
+ans:0,
+exp:'피코토닝은 진피층 멜라닌 덩어리를 분해하여 색소를 완화하며, 완치나 화이트닝 개념이 아닙니다.',
+cri:'①번 선택'},
+
+{id:45,type:'mc',ch:'피코·색소 레이저',dif:'최상',
+text:'기미의 주요 원인으로 나열된 것 중 교육 자료에 포함되지 않은 것은?',
+opts:['계절 변화(봄·여름)','자외선','스트레스','과도한 음주'],
+ans:3,
+exp:'교육 자료에서 기미 주요 원인: 계절 변화(봄·여름), 자외선, 스트레스, 호르몬 변화, 출산·생리 등. 과도한 음주는 포함되지 않습니다.',
+cri:'④번 선택'},
+
+{id:46,type:'mc',ch:'피코·색소 레이저',dif:'중상',
+text:'오타모드 시술의 대상 병변과 시술 간격으로 옳은 것은?',
+opts:[
+'기미 / 1주 간격 10회 이상',
+'오타모반 / 4주 간격 5회 이상',
+'잡티 / 2~4주 간격 3회 이상',
+'PIH / 1주 간격 5회 이상'
+],
+ans:1,
+exp:'오타모드는 진피층 오타모반을 대상으로 4주 간격 5회 이상 시술합니다.',
+cri:'②번 선택'},
+
+{id:47,type:'mc',ch:'피코·색소 레이저',dif:'상',
+text:'문신제거 시술에서 100% 제거가 불가능한 이유로 교육 자료에 서술된 것은?',
+opts:[
+'레이저 에너지가 부족하기 때문이다',
+'문신 시 피부 손상 및 잉크 불균일 주입과 관련이 있기 때문이다',
+'색소가 진피 아래 근막층까지 침투했기 때문이다',
+'잉크 성분이 레이저에 반응하지 않기 때문이다'
+],
+ans:1,
+exp:'문신제거 100% 제거 불가 이유: 끊김 현상은 문신 시 피부 손상 및 잉크 불균일 주입과 관련이 있습니다.',
+cri:'②번 선택'},
+
+{id:48,type:'mc',ch:'피코·색소 레이저',dif:'중상',
+text:'MLA토닝의 효과로 옳은 것은?',
+opts:[
+'표피층 색소 딱지 형성',
+'진피층 콜라겐·엘라스틴 재배열 유도로 피부결·광·탄력·모공 개선',
+'모낭 파괴를 통한 제모',
+'피지선 억제를 통한 여드름 감소'
+],
+ans:1,
+exp:'MLA토닝은 콜라겐·엘라스틴 재배열을 유도해 피부결·광·탄력·모공을 개선합니다.',
+cri:'②번 선택'},
+
+{id:49,type:'short',ch:'피코·색소 레이저',dif:'중상',
+text:'듀얼토닝이 무엇인지 구성 시술명을 포함하여 쓰시오.',
+ans:['피코토닝','MLA토닝'],
+exp:'듀얼토닝 = 피코토닝 + MLA토닝입니다.',
+cri:'두 시술명 모두 기재 시 정답'},
+
+{id:50,type:'essay',ch:'피코·색소 레이저',dif:'최상',
+text:'고객이 "기미가 완전히 없어질 수 있나요?"라고 물었을 때 적절한 상담 멘트와 그 근거를 서술하시오.',
+ans:['완치','화이트닝','아님','관리','분해','흐리게'],
+exp:'피코토닝은 완치나 화이트닝 개념이 아닌 멜라닌 덩어리를 분해하여 흐리게 하고 퍼지는 면적을 줄이는 시술입니다. "기미는 완전히 없어지는 개념이 아니라, 색소를 분해하여 흐리게 하고 퍼짐을 줄이는 관리 개념이에요. 꾸준한 시술과 자외선 차단이 중요합니다."',
+cri:'완치 불가 설명 + 색소 분해 원리 + 관리 개념 안내 + 자외선 차단 언급 시 만점'},
+
+// ===================== 목차 6: 피코프락셀·CO2프락셀 (10문항) =====================
+{id:51,type:'mc',ch:'피코프락셀·CO2프락셀',dif:'중상',
+text:'피코프락셀의 주요 타깃 피부층과 적응증으로 옳은 것은?',
+opts:[
+'표피층 / 잡티·주근깨',
+'진피층 / 모공·여드름 흉터·패인 상처',
+'피하지방층 / 볼륨 축소',
+'근막층 / 리프팅'
+],
+ans:1,
+exp:'피코프락셀은 진피층의 모공·여드름 흉터·패인 상처를 주요 타깃으로 합니다.',
+cri:'②번 선택'},
+
+{id:52,type:'mc',ch:'피코프락셀·CO2프락셀',dif:'상',
+text:'피코프락셀에서 LIOB(Laser Induced Optical Breakdown)가 유도하는 효과로 옳은 것은?',
+opts:[
+'표피층 박피',
+'콜라겐·엘라스틴 재배열',
+'모낭 파괴',
+'지방세포 파괴'
+],
+ans:1,
+exp:'MLA 렌즈로 미세 열손상(LIOB)을 유발하여 콜라겐·엘라스틴 재배열을 유도합니다.',
+cri:'②번 선택'},
+
+{id:53,type:'mc',ch:'피코프락셀·CO2프락셀',dif:'중상',
+text:'피코프락셀 시술 후 나타날 수 있는 반응으로 옳은 것은?',
+opts:[
+'흰 딱지 7일 지속',
+'붉음증·점상출혈 1~2일 지속',
+'색소침착 즉시 발생',
+'부종 1주일 이상 지속'
+],
+ans:1,
+exp:'피코프락셀 시술 후 붉음증·점상출혈이 1~2일 지속될 수 있습니다.',
+cri:'②번 선택'},
+
+{id:54,type:'mc',ch:'피코프락셀·CO2프락셀',dif:'상',
+text:'CO2 프락셀과 피코프락셀을 비교했을 때 CO2 프락셀의 특징으로 옳은 것은?',
+opts:[
+'통증이 없고 다운타임이 짧다',
+'재생 자극이 강하고 파인 흉터·피부결 개선에 강하지만 통증과 다운타임이 길다',
+'표피층 색소에만 반응한다',
+'마취 없이 시술 가능하다'
+],
+ans:1,
+exp:'CO2 프락셀은 재생 자극이 강하고 파인 흉터·피부결 개선에 강하지만, 통증·긴 다운타임·딱지·붉음증·색소침착 가능성이 단점입니다.',
+cri:'②번 선택'},
+
+{id:55,type:'mc',ch:'피코프락셀·CO2프락셀',dif:'최상',
+text:'CO2 프락셀 시술 후 당일 제한사항으로 옳은 것은?',
+opts:[
+'당일 세안 가능, 메이크업 가능',
+'당일 세안 불가, 메이크업 불가',
+'당일 세안 불가, 메이크업 가능',
+'당일 세안 가능, 메이크업 불가'
+],
+ans:1,
+exp:'CO2 프락셀은 딱지가 7~10일 지속되며 당일 세안 및 메이크업이 불가합니다.',
+cri:'②번 선택'},
+
+{id:56,type:'mc',ch:'피코프락셀·CO2프락셀',dif:'중상',
+text:'CO2 프락셀의 마취 시간으로 옳은 것은?',
+opts:['10분','20분','30분','마취 불필요'],
+ans:2,
+exp:'CO2 프락셀의 마취는 크림 마취 30분입니다.',
+cri:'③번 선택'},
+
+{id:57,type:'mc',ch:'피코프락셀·CO2프락셀',dif:'상',
+text:'피코프락셀 마무리 전체 시술 시 관리실에서 진행되는 절차는?',
+opts:[
+'수딩겔 도포 후 귀가',
+'PDT그린 + 재생 관리',
+'하티손 도포 후 귀가',
+'듀오덤 부착 후 귀가'
+],
+ans:1,
+exp:'피코프락셀 전체 마무리: 관리실 이동 후 PDT그린 + 재생 관리를 진행합니다.',
+cri:'②번 선택'},
+
+{id:58,type:'mc',ch:'피코프락셀·CO2프락셀',dif:'중상',
+text:'CO2 프락셀의 시술 간격으로 옳은 것은?',
+opts:['1주 간격 10회 이상','2주 간격 5회 이상','4주 간격 3회 이상','6개월 간격 1회'],
+ans:2,
+exp:'CO2 프락셀은 4주 간격 3회 이상 시술합니다.',
+cri:'③번 선택'},
+
+{id:59,type:'short',ch:'피코프락셀·CO2프락셀',dif:'상',
+text:'CO2 프락셀의 주요 단점을 4가지 이상 쓰시오.',
+ans:['통증','다운타임','딱지','붉음증','색소침착'],
+exp:'CO2 프락셀 단점: 통증, 긴 다운타임, 딱지, 붉음증, 화끈거림, 색소침착·자국 가능성.',
+cri:'4가지 이상 기재 시 만점'},
+
+{id:60,type:'essay',ch:'피코프락셀·CO2프락셀',dif:'최상',
+text:'여드름 흉터로 고민하는 고객에게 피코프락셀과 CO2프락셀 중 어떤 시술이 더 적합할 수 있는지 두 시술의 특징을 비교하여 상담하는 내용을 서술하시오.',
+ans:['여드름 흉터','피코프락셀','CO2','다운타임','딱지'],
+exp:'피코프락셀: 표피층 손상 최소화, 붉음증·점상출혈 1~2일, 2주 간격. CO2프락셀: 재생 자극 강하고 깊은 흉터 개선에 강하지만 딱지 7~10일, 당일 세안·메이크업 불가. 흉터 깊이와 고객의 다운타임 허용 여부에 따라 선택.',
+cri:'두 시술 특징 비교 + 다운타임 차이 + 고객 상황에 따른 선택 기준 제시 시 만점'},
+
+// ===================== 목차 7: 클라리티Ⅱ 색소·제모 (10문항) =====================
+{id:61,type:'mc',ch:'클라리티Ⅱ 색소·제모',dif:'중상',
+text:'클라리티Ⅱ가 사용하는 두 가지 파장으로 옳은 것은?',
+opts:['532nm + 1,064nm','755nm + 1,064nm','532nm + 755nm','694nm + 1,064nm'],
+ans:1,
+exp:'클라리티Ⅱ는 755nm 알렉산드라이트 + 1,064nm Nd:YAG 듀얼파장을 사용합니다.',
+cri:'②번 선택'},
+
+{id:62,type:'mc',ch:'클라리티Ⅱ 색소·제모',dif:'상',
+text:'클라리티 혈관/홍조 시술의 원리로 옳은 것은?',
+opts:[
+'532nm가 표피층 멜라닌에 반응',
+'1,064nm Nd:YAG가 혈관 내 헤모글로빈에 반응하여 혈관 병변 완화',
+'755nm 알렉산드라이트가 모낭을 파괴',
+'10,600nm CO2가 혈관 조직을 기화'
+],
+ans:1,
+exp:'클라리티 혈관/홍조는 1,064nm Nd:YAG가 혈관 내 헤모글로빈에 반응하여 혈관 병변을 완화합니다.',
+cri:'②번 선택'},
+
+{id:63,type:'mc',ch:'클라리티Ⅱ 색소·제모',dif:'중상',
+text:'클라리티 혈관/홍조 시술 후 주의해야 할 사항으로 옳은 것은?',
+opts:[
+'세안 금지 1주일',
+'체온 상승을 유발하는 알코올·매운 음식·찜질방·사우나 자제',
+'스크럽 사용 권장',
+'메이크업 금지 2주일'
+],
+ans:1,
+exp:'클라리티 혈관/홍조 시술 후 체온 상승을 유발하는 알코올·매운 음식·찜질방·사우나를 자제해야 합니다.',
+cri:'②번 선택'},
+
+{id:64,type:'mc',ch:'클라리티Ⅱ 색소·제모',dif:'상',
+text:'클라리티 혈관/홍조 시술의 한계로 교육 자료에 명시된 것은?',
+opts:[
+'5회 이내 완치 불가',
+'감정 홍조에는 효과 없음',
+'모든 혈관 병변에 효과 없음',
+'얼굴에만 적용 가능'
+],
+ans:1,
+exp:'클라리티 혈관/홍조 시술은 감정 홍조에는 효과가 없습니다.',
+cri:'②번 선택'},
+
+{id:65,type:'mc',ch:'클라리티Ⅱ 색소·제모',dif:'최상',
+text:'클라리티 제모 시술 전 금지 사항으로 모두 옳은 것은?',
+opts:[
+'면도 금지 / 왁싱·모근기 사용·태닝·타투 금지',
+'면도 필수 / 왁싱·모근기 사용·태닝·타투 금지',
+'면도 필수 / 왁싱만 금지',
+'면도 금지 / 태닝만 금지'
+],
+ans:1,
+exp:'제모 시술 전 면도는 필수이며, 왁싱·모근기 사용·태닝·타투는 금지입니다.',
+cri:'②번 선택'},
+
+{id:66,type:'mc',ch:'클라리티Ⅱ 색소·제모',dif:'중상',
+text:'클라리티 제모 시술에서 남성 수염 제모 시에만 추가되는 준비 절차는?',
+opts:['접지패드 연결','크림 마취 20분','초음파 겔 도포','드레싱 밧드 세팅'],
+ans:1,
+exp:'클라리티 제모는 냉각 시스템이 있어 기본적으로 마취가 없지만, 남성 수염만 크림 마취 20분을 적용합니다.',
+cri:'②번 선택'},
+
+{id:67,type:'mc',ch:'클라리티Ⅱ 색소·제모',dif:'중상',
+text:'클라리티 콜라겐토닝의 시술 간격으로 옳은 것은?',
+opts:['4주 간격 3회 이상','2주 간격 5회 이상','1주 간격 10회 이상','6개월 간격 유지'],
+ans:2,
+exp:'클라리티 콜라겐토닝은 1주 간격 10회 이상 시술합니다.',
+cri:'③번 선택'},
+
+{id:68,type:'mc',ch:'클라리티Ⅱ 색소·제모',dif:'상',
+text:'클라리티 잡티 시술 후 주의사항으로 옳은 것은?',
+opts:[
+'딱지를 손으로 제거해도 무방하다',
+'깨알 딱지가 7일 이내 정리되며 딱지 손제거·스크럽 금지',
+'딱지가 생기면 즉시 내원해야 한다',
+'딱지 제거를 위해 스크럽을 권장한다'
+],
+ans:1,
+exp:'클라리티 잡티 시술 후 깨알 딱지가 7일 이내 정리되며, 딱지 손제거·스크럽은 금지입니다.',
+cri:'②번 선택'},
+
+{id:69,type:'short',ch:'클라리티Ⅱ 색소·제모',dif:'중상',
+text:'클라리티Ⅱ에서 제모가 가능한 원리를 한 문장으로 쓰시오.',
+ans:['멜라닌','모낭','파괴'],
+exp:'모근의 멜라닌 색소에 레이저 에너지가 흡수되어 모낭을 파괴합니다.',
+cri:'멜라닌 흡수 + 모낭 파괴 두 요소 포함 시 정답'},
+
+{id:70,type:'essay',ch:'클라리티Ⅱ 색소·제모',dif:'최상',
+text:'클라리티Ⅱ 제모를 처음 받으러 온 고객에게 시술 전 주의사항, 마취 여부, 마무리 방법, 시술 간격을 포함하여 안내하는 내용을 서술하시오.',
+ans:['면도','왁싱 금지','마취 없음','소독','진정연고','4주','10회'],
+exp:'면도 필수, 왁싱·모근기·태닝·타투 금지 / 냉각 시스템으로 마취 없음(수염만 예외) / 마무리: 소독+진정연고, 기계 팁·윈도우 알코올솜 소독 / 4주 간격 최소 10회 이상',
+cri:'4가지 항목(시술 전 주의·마취·마무리·간격) 모두 포함 시 만점'},
+
+// ===================== 목차 8: CO2 레이저 병변 (10문항) =====================
+{id:71,type:'mc',ch:'CO2 레이저 병변',dif:'중상',
+text:'CO2 레이저 병변 시술의 주요 원리로 옳은 것은?',
+opts:[
+'멜라닌에 에너지가 흡수되어 색소를 분해',
+'피부조직 내 수분에 CO2 레이저 에너지가 흡수되어 조직을 기화·절제',
+'헤모글로빈에 에너지가 흡수되어 혈관을 응고',
+'모낭의 멜라닌에 흡수되어 모낭을 파괴'
+],
+ans:1,
+exp:'CO2 레이저는 피부조직 내 수분에 에너지가 흡수되어 조직을 기화·절제·박피·응고(깎아냄)합니다.',
+cri:'②번 선택'},
+
+{id:72,type:'mc',ch:'CO2 레이저 병변',dif:'상',
+text:'쥐젖(acrochordon) 시술 시 사용하는 선택 준비물로 옳은 것은?',
+opts:['코메도','포셉','압출기','드레싱 밧드만'],
+ans:1,
+exp:'쥐젖 시술 시 선택 준비물로 포셉을 사용합니다. 코메도는 비립종·피지샘증식증에 사용합니다.',
+cri:'②번 선택'},
+
+{id:73,type:'mc',ch:'CO2 레이저 병변',dif:'중상',
+text:'비립종의 발생 원인으로 옳은 것은?',
+opts:[
+'멜라닌 색소의 과다 증식',
+'각질과 피지가 배출되지 못하고 피부 안에 박혀 생김',
+'피지관 확장과 피지샘 증식',
+'바이러스성 감염'
+],
+ans:1,
+exp:'비립종은 각질과 피지가 배출되지 못하고 피부 안에 박혀 생기며, 주로 눈가에 발생합니다.',
+cri:'②번 선택'},
+
+{id:74,type:'mc',ch:'CO2 레이저 병변',dif:'상',
+text:'한관종 시술 시 주의해야 할 해부학적 특성으로 옳은 것은?',
+opts:[
+'뿌리가 깊어 반복 시술이 필요하다',
+'얇은 눈밑 피부를 고려하여 보존적으로 진행해야 한다',
+'바이러스성 질환이므로 소독을 철저히 해야 한다',
+'피지샘이 연관되어 있어 압출이 필요하다'
+],
+ans:1,
+exp:'한관종은 얇은 눈밑 피부를 고려하여 보존적으로 진행하며, 붉은 자국·색소침착·재발 가능성을 안내해야 합니다.',
+cri:'②번 선택'},
+
+{id:75,type:'mc',ch:'CO2 레이저 병변',dif:'최상',
+text:'편평사마귀 시술 후 마무리 절차에서 반드시 추가해야 하는 것은?',
+opts:[
+'듀오덤 부착',
+'마무리 후 손과 밧드를 알코올 소독 필수',
+'하티손 도포',
+'수딩겔 전체 도포'
+],
+ans:1,
+exp:'편평사마귀는 바이러스성 질환이므로 CO2 레이저로 병변 제거 후 마무리 시 손과 밧드를 알코올 소독 필수입니다.',
+cri:'②번 선택'},
+
+{id:76,type:'mc',ch:'CO2 레이저 병변',dif:'중상',
+text:'점(melanocytic nevus) 시술 시 재발 가능성이 있는 경우로 옳은 것은?',
+opts:[
+'시술 횟수가 부족한 경우',
+'뿌리가 남아 있는 경우 / 깊은 점은 반복 시술 필요',
+'레이저 에너지가 높은 경우',
+'마취 시간이 짧은 경우'
+],
+ans:1,
+exp:'점은 뿌리가 남아 있을 경우 재발 가능하며, 깊은 점은 반복 시술이 필요합니다.',
+cri:'②번 선택'},
+
+{id:77,type:'mc',ch:'CO2 레이저 병변',dif:'상',
+text:'CO2 레이저 병변 시술 후 붉은 자국이 지속되는 기간으로 옳은 것은?',
+opts:['1~2주','1개월','3~6개월','1년 이상'],
+ans:2,
+exp:'CO2 레이저 병변 시술 후 붉은 자국은 3~6개월 지속될 수 있습니다.',
+cri:'③번 선택'},
+
+{id:78,type:'mc',ch:'CO2 레이저 병변',dif:'중상',
+text:'피지샘증식증 시술 시 사용하는 선택 준비물로 옳은 것은?',
+opts:['포셉','코메도(압출기)','긴면봉','드레싱 밧드만'],
+ans:1,
+exp:'피지샘증식증은 압출 보조를 위해 코메도(압출기)를 사용합니다.',
+cri:'②번 선택'},
+
+{id:79,type:'short',ch:'CO2 레이저 병변',dif:'상',
+text:'CO2 레이저로 시술 가능한 병변 6가지를 쓰시오.',
+ans:['점','편평사마귀','비립종','한관종','티눈','피지샘증식증','쥐젖'],
+exp:'CO2 레이저 대상 병변: 점·편평사마귀·비립종·한관종·티눈·피지샘증식증·쥐젖',
+cri:'6가지 이상 기재 시 만점'},
+
+{id:80,type:'essay',ch:'CO2 레이저 병변',dif:'최상',
+text:'편평사마귀와 한관종의 발생 원인, 시술 포인트, 재발 가능성을 비교하여 서술하시오.',
+ans:['바이러스','면역력','땀샘','재발','알코올 소독','보존적'],
+exp:'편평사마귀: 바이러스성, 면역력 저하 시 잘 나타남, 재발 가능성 매우 높음, 마무리 후 알코올 소독 필수. 한관종: 땀샘 막힘 또는 과다 증식, 눈밑 얇은 피부 고려하여 보존적 진행, 재발 가능성 있음.',
+cri:'두 병변의 원인 비교 + 시술 포인트 차이 + 재발 가능성 + 편평사마귀 소독 필수 언급 시 만점'},
+
+// ===================== 목차 9: 카프리 (10문항) =====================
+{id:81,type:'mc',ch:'카프리',dif:'중상',
+text:'카프리(CAPRI) 기기의 두 가지 레이저 파장 조합으로 옳은 것은?',
+opts:[
+'532nm + 1,064nm',
+'1,450nm Diode Laser + 약 400nm Blue Laser',
+'755nm + 1,064nm',
+'1,064nm + 10,600nm'
+],
+ans:1,
+exp:'카프리는 1,450nm Diode Laser + 약 400nm Blue Laser를 사용합니다.',
+cri:'②번 선택'},
+
+{id:82,type:'mc',ch:'카프리',dif:'상',
+text:'카프리 블루라이트(400nm)의 주요 작용 메커니즘으로 옳은 것은?',
+opts:[
+'피지선을 직접 파괴',
+'여드름균(P.acnes)에 반응하여 살균·억제',
+'모낭의 멜라닌을 파괴',
+'콜라겐 재생을 촉진'
+],
+ans:1,
+exp:'블루라이트(약 400nm)는 여드름균에 반응하여 살균·억제 작용을 합니다.',
+cri:'②번 선택'},
+
+{id:83,type:'mc',ch:'카프리',dif:'중상',
+text:'카프리 스탬핑(Stamp Mode)의 주요 타깃으로 옳은 것은?',
+opts:[
+'얼굴 전체 피지 과다',
+'초기 여드름·국소 염증·뭉친 피지',
+'반복 여드름·모공',
+'홍조·혈관 병변'
+],
+ans:1,
+exp:'카프리 스탬핑은 초기 여드름·국소 염증·뭉친 피지를 타깃으로 하며 단독 시술도 가능합니다.',
+cri:'②번 선택'},
+
+{id:84,type:'mc',ch:'카프리',dif:'상',
+text:'"피지토닝"의 구성 시술로 옳은 것은?',
+opts:[
+'피코토닝 + 블루라이트',
+'카프리토닝 + 블루라이트',
+'MLA토닝 + 카프리토닝',
+'듀얼토닝 + 블루라이트'
+],
+ans:1,
+exp:'피지토닝 = 카프리토닝 + 블루라이트입니다.',
+cri:'②번 선택'},
+
+{id:85,type:'mc',ch:'카프리',dif:'최상',
+text:'카프리 1,450nm 파장이 작용하는 피부층과 효과를 가장 정확히 설명한 것은?',
+opts:[
+'표피층 / 멜라닌 색소 분해',
+'진피층 피지선 활동 억제 / 과잉 피지 억제·여드름 감소·모공 완화',
+'피하지방층 / 지방세포 파괴',
+'근막층 / 리프팅 효과'
+],
+ans:1,
+exp:'1,450nm는 진피층 피지선에 작용하여 피지선 활동을 억제하고 과잉 피지 억제·여드름 감소·모공 완화 효과를 냅니다.',
+cri:'②번 선택'},
+
+{id:86,type:'mc',ch:'카프리',dif:'중상',
+text:'카프리의 시술 간격으로 옳은 것은?',
+opts:['4주 간격 5회 이상','2주 간격 5회 이상','1주 간격 10회 이상','매일 시술 가능'],
+ans:2,
+exp:'카프리는 1주 간격 10회 이상 시술합니다.',
+cri:'③번 선택'},
+
+{id:87,type:'mc',ch:'카프리',dif:'상',
+text:'카프리 스탬핑에서 통증을 최소화하는 방법으로 옳은 것은?',
+opts:[
+'크림 마취 20분',
+'냉각 가스 사용',
+'얼음팩 적용',
+'리도카인 주사'
+],
+ans:1,
+exp:'카프리 스탬핑은 냉각 가스를 사용하여 통증을 최소화합니다.',
+cri:'②번 선택'},
+
+{id:88,type:'mc',ch:'카프리',dif:'중상',
+text:'카프리 마무리 제품으로 옳은 것은?',
+opts:['듀오덤','하티손','수딩겔','안연고'],
+ans:2,
+exp:'카프리 마무리는 수딩겔을 사용합니다.',
+cri:'③번 선택'},
+
+{id:89,type:'short',ch:'카프리',dif:'중상',
+text:'카프리의 3가지 주요 모드를 쓰시오.',
+ans:['Stamp Mode','Toning Mode','Blue Laser Mode'],
+exp:'카프리의 주요 모드: Stamp Mode / Toning Mode / Blue Laser Mode',
+cri:'3가지 모두 기재 시 만점'},
+
+{id:90,type:'essay',ch:'카프리',dif:'최상',
+text:'염증성 여드름이 심한 고객에게 카프리 시술을 권유할 때 블루라이트와 토닝 모드 각각의 역할과 함께 시술 계획을 설명하는 내용을 서술하시오.',
+ans:['블루라이트','여드름균','토닝','피지선','1주','10회'],
+exp:'블루라이트: 여드름균 살균·억제 / 토닝: 진피층 피지선 억제, 과잉 피지 감소, 피부결 개선 / 피지토닝(카프리토닝+블루라이트) 병행 추천 / 1주 간격 10회 이상',
+cri:'블루라이트 역할 + 토닝 역할 + 시술 간격/횟수 포함 시 만점'},
+
+// ===================== 목차 10: 인모드 (10문항) =====================
+{id:91,type:'mc',ch:'인모드',dif:'중상',
+text:'인모드(InMode)가 사용하는 에너지 방식으로 옳은 것은?',
+opts:['HIFU(고강도 집속형 초음파)','Bipolar RF(양극성 고주파)','Monopolar RF(단극성 고주파)','Diode Laser'],
+ans:1,
+exp:'인모드는 Bipolar RF(양극성 고주파) 에너지를 사용합니다.',
+cri:'②번 선택'},
+
+{id:92,type:'mc',ch:'인모드',dif:'상',
+text:'인모드 Mini FX와 Body FX의 차이로 옳은 것은?',
+opts:[
+'Mini FX: 바디 윤곽 관리 / Body FX: 얼굴 타이트닝',
+'Mini FX: 얼굴/작은 부위 윤곽 개선 / Body FX: 바디 윤곽·지방층 관리',
+'Mini FX: 피하지방 타깃 / Body FX: 진피층 타깃',
+'두 기기는 동일한 기능을 가진다'
+],
+ans:1,
+exp:'Mini FX는 얼굴/작은 부위 윤곽 개선, Body FX는 바디 윤곽·지방층 관리에 사용됩니다.',
+cri:'②번 선택'},
+
+{id:93,type:'mc',ch:'인모드',dif:'중상',
+text:'인모드 FORMA의 주요 적용 부위로 옳은 것은?',
+opts:[
+'복부·옆구리·허벅지·팔뚝',
+'이중턱·양볼',
+'얼굴·목·잔주름 부위',
+'두피·탈모 부위'
+],
+ans:2,
+exp:'FORMA는 얼굴·목·잔주름 부위에 적용하며 진피층 타이트닝·탄력 개선을 목적으로 합니다.',
+cri:'③번 선택'},
+
+{id:94,type:'mc',ch:'인모드',dif:'상',
+text:'Body FX의 에너지 조합으로 옳은 것은?',
+opts:[
+'Bipolar RF만 사용',
+'Vacuum(흡입) + Bipolar RF + High voltage(고압전류)',
+'HIFU + Bipolar RF',
+'Monopolar RF + Bipolar RF'
+],
+ans:1,
+exp:'Body FX는 Vacuum(흡입) + Bipolar RF(양극성 고주파) + High voltage(고압전류)를 조합하여 사용합니다.',
+cri:'②번 선택'},
+
+{id:95,type:'mc',ch:'인모드',dif:'최상',
+text:'인모드 시술 후 Cooling을 금지하는 이유로 가장 적절한 것은?',
+opts:[
+'냉각이 RF 에너지를 차단하기 때문이다',
+'RF 열 에너지에 의한 콜라겐 수축 효과를 유지해야 하기 때문이다',
+'냉각이 색소침착을 유발하기 때문이다',
+'냉각 후 부종이 심해지기 때문이다'
+],
+ans:1,
+exp:'인모드 시술 후 Cooling은 금지되며, 이는 RF 열 에너지로 유도된 콜라겐 수축 효과를 보존하기 위함입니다.',
+cri:'②번 선택'},
+
+{id:96,type:'mc',ch:'인모드',dif:'중상',
+text:'인모드 FORMA의 시술 간격으로 옳은 것은?',
+opts:['1주×5회 이상','2주×5회 이상','4주×3회 이상','6개월×1회'],
+ans:0,
+exp:'FORMA는 1주×5회 이상 시술합니다.',
+cri:'①번 선택'},
+
+{id:97,type:'mc',ch:'인모드',dif:'상',
+text:'인모드 Mini FX 시술 후 나타날 수 있는 반응으로 옳은 것은?',
+opts:[
+'딱지·색소침착',
+'붉음증·열감·점상출혈',
+'흰 딱지',
+'모발 탈락'
+],
+ans:1,
+exp:'Mini FX 시술 후 붉음증·열감·점상출혈이 나타날 수 있습니다.',
+cri:'②번 선택'},
+
+{id:98,type:'mc',ch:'인모드',dif:'중상',
+text:'인모드 FORMA 마무리 절차로 옳은 것은?',
+opts:[
+'듀오덤 부착',
+'초음파겔 정리 후 상온 수딩겔 (기기 팁 정리 포함)',
+'하티손 도포',
+'소독 후 귀가'
+],
+ans:1,
+exp:'FORMA 마무리: 초음파겔 정리 후 상온 수딩겔 도포, 기기 팁 정리 포함.',
+cri:'②번 선택'},
+
+{id:99,type:'short',ch:'인모드',dif:'중상',
+text:'인모드 3가지 모드 명칭과 각각의 주요 목적을 쓰시오.',
+ans:['FORMA','Mini FX','Body FX'],
+exp:'FORMA: 피부 타이트닝·탄력 개선 / Mini FX: 얼굴·작은 부위 윤곽 개선 / Body FX: 바디 윤곽·지방층 관리',
+cri:'3가지 모드 명칭 + 각 목적 포함 시 만점'},
+
+{id:100,type:'essay',ch:'인모드',dif:'최상',
+text:'이중턱과 복부 지방 관리를 동시에 원하는 고객에게 인모드 기기 중 어떤 모드를 어떤 순서와 간격으로 추천할지 근거를 포함하여 서술하시오.',
+ans:['Mini FX','Body FX','이중턱','복부','2주','1주'],
+exp:'이중턱: Mini FX (2주×5회 이상, 이중턱·양볼 윤곽 개선) / 복부: Body FX (1주×5회 이상, 복부·옆구리 지방층 관리). 각 부위에 맞는 모드를 선택하고 시술 간격과 횟수를 안내.',
+cri:'Mini FX·Body FX 각각 적응증 + 시술 간격 + 두 모드 병행 가능성 언급 시 만점'},
+
+// ===================== 목차 11: 덴서티 하이 (10문항) =====================
+{id:101,type:'mc',ch:'덴서티 하이',dif:'중상',
+text:'덴서티 하이(Density High)가 사용하는 고주파 방식으로 옳은 것은?',
+opts:[
+'단극성 고주파(Monopolar)만 사용',
+'양극성 고주파(Bipolar)만 사용',
+'듀얼 고주파(모노폴라 + 바이폴라)',
+'HIFU(고강도 집속형 초음파)'
+],
+ans:2,
+exp:'덴서티 하이는 모노폴라(단극성) + 바이폴라(양극성) 듀얼 고주파, 6.78MHz를 사용합니다.',
+cri:'③번 선택'},
+
+{id:102,type:'mc',ch:'덴서티 하이',dif:'상',
+text:'덴서티 하이 시술 전 반드시 확인해야 할 필수 사항으로 옳은 것은?',
+opts:[
+'마취크림 도포 여부',
+'금속 장신구 모두 제거 여부',
+'식사 여부',
+'세안 여부'
+],
+ans:1,
+exp:'덴서티 하이 시술 전 금속 장신구를 모두 제거해야 합니다. 이는 고주파가 금속에 반응할 수 있기 때문입니다.',
+cri:'②번 선택'},
+
+{id:103,type:'mc',ch:'덴서티 하이',dif:'중상',
+text:'덴서티 하이의 주요 타깃 층으로 옳은 것은?',
+opts:[
+'표피층',
+'진피 상부/하부층, 근막층',
+'피하지방층',
+'근육층'
+],
+ans:1,
+exp:'덴서티 하이는 진피 상부/하부층과 근막층을 주요 타깃으로 합니다.',
+cri:'②번 선택'},
+
+{id:104,type:'mc',ch:'덴서티 하이',dif:'상',
+text:'덴서티 하이의 효과로 옳은 것은?',
+opts:[
+'표피층 색소 분해',
+'콜라겐 생성 촉진, 피부 속을 채워 피부 밀도 개선',
+'지방세포 파괴',
+'모낭 파괴를 통한 제모'
+],
+ans:1,
+exp:'덴서티 하이는 콜라겐 생성을 촉진하여 피부 속을 채우고 피부 밀도를 개선합니다.',
+cri:'②번 선택'},
+
+{id:105,type:'mc',ch:'덴서티 하이',dif:'최상',
+text:'덴서티 하이의 시술 간격과 유지 관리 주기로 모두 옳은 것은?',
+opts:[
+'1주 간격 10회 이상 / 3개월 간격 유지',
+'2주 간격 5회 이상 / 3개월 간격 유지',
+'4주 간격 3회 이상 / 6개월 간격 유지',
+'4주 간격 5회 이상 / 1년 간격 유지'
+],
+ans:2,
+exp:'덴서티 하이는 4주 간격 3회 이상 시술하며 6개월 간격으로 유지 관리합니다.',
+cri:'③번 선택'},
+
+{id:106,type:'mc',ch:'덴서티 하이',dif:'중상',
+text:'덴서티 하이 준비물로 옳은 것은?',
+opts:[
+'상온 초음파겔+붓',
+'크림 마취 20분 + 접지패드 연결 + 덴서티 전용 겔+붓',
+'드레싱 밧드(생리식염수·보릭솜)',
+'하티손+리비힐 앰플'
+],
+ans:1,
+exp:'덴서티 준비물: 크림 마취 20분, 접지패드 연결, 덴서티 전용 겔+붓.',
+cri:'②번 선택'},
+
+{id:107,type:'mc',ch:'덴서티 하이',dif:'중상',
+text:'덴서티 하이 시술 후 나타날 수 있는 반응으로 옳은 것은?',
+opts:[
+'색소침착·딱지',
+'뼈 부위 약간 찌릿함·홍반·따끔거림·땅김',
+'점상출혈 1주일 지속',
+'흰 딱지 7일 지속'
+],
+ans:1,
+exp:'덴서티 하이 시술 후 뼈 부위 약간 찌릿함·홍반·따끔거림·땅김이 나타날 수 있습니다.',
+cri:'②번 선택'},
+
+{id:108,type:'mc',ch:'덴서티 하이',dif:'상',
+text:'덴서티 하이의 냉각 시스템 단계로 옳은 것은?',
+opts:['3단계','5단계','7단계','10단계'],
+ans:1,
+exp:'덴서티 하이는 5단계 쿨링 시스템을 갖추고 있습니다.',
+cri:'②번 선택'},
+
+{id:109,type:'short',ch:'덴서티 하이',dif:'중상',
+text:'덴서티 하이와 인모드의 공통된 에너지 방식과 차이점을 간략히 쓰시오.',
+ans:['고주파','RF','덴서티','듀얼','인모드','바이폴라'],
+exp:'공통: 고주파(RF) 에너지 사용 / 차이: 덴서티는 모노폴라+바이폴라 듀얼 고주파, 인모드는 바이폴라 RF 사용.',
+cri:'공통점(고주파) + 차이점(덴서티 듀얼 vs 인모드 바이폴라) 포함 시 정답'},
+
+{id:110,type:'essay',ch:'덴서티 하이',dif:'최상',
+text:'피부 밀도가 낮고 탄력이 저하된 고객에게 덴서티 하이를 권유하며 시술 원리, 준비 절차, 시술 간격, 시술 전 주의사항을 포함하여 안내하는 내용을 서술하시오.',
+ans:['듀얼 고주파','콜라겐','금속','접지패드','4주','6개월'],
+exp:'원리: 듀얼 고주파(모노폴라+바이폴라)로 진피~근막층 콜라겐 생성 촉진·피부 밀도 개선 / 준비: 크림 마취 20분·접지패드·전용 겔 / 간격: 4주 3회 이상, 6개월 유지 / 주의: 금속 장신구 모두 제거',
+cri:'원리+준비+간격+금속 장신구 제거 4가지 포함 시 만점'},
+
+// ===================== 목차 12: 유니버스 슈링크 (10문항) =====================
+{id:111,type:'mc',ch:'유니버스 슈링크',dif:'중상',
+text:'유니버스 슈링크가 사용하는 에너지 방식으로 옳은 것은?',
+opts:[
+'Bipolar RF(양극성 고주파)',
+'고강도 집속형 초음파(HIFU)',
+'Monopolar RF(단극성 고주파)',
+'Diode Laser'
+],
+ans:1,
+exp:'유니버스 슈링크는 고강도 집속형 초음파(HIFU)를 사용합니다.',
+cri:'②번 선택'},
+
+{id:112,type:'mc',ch:'유니버스 슈링크',dif:'상',
+text:'슈링크 도트(Dot)/Normal 모드와 선/MP 모드(울트라)의 차이로 옳은 것은?',
+opts:[
+'도트: 400개 열응고점 선형 / 울트라: 17개 점형',
+'도트: 한 번 조사로 17개 점형 열응고점 / 울트라: 약 400개 열응고점 선형으로 촘촘히',
+'두 모드는 동일한 열응고점을 생성한다',
+'도트: 진피층 / 울트라: 표피층 타깃'
+],
+ans:1,
+exp:'도트/Normal: 17개 점형 열응고점 / 선/MP(울트라): 약 400개 열응고점을 선형으로 촘촘하게.',
+cri:'②번 선택'},
+
+{id:113,type:'mc',ch:'유니버스 슈링크',dif:'중상',
+text:'아이슈링크의 주요 타깃 부위와 카트리지 특성으로 옳은 것은?',
+opts:[
+'상부 피하지방층·근막층 / 3mm·4.5mm 건타입',
+'진피 상부/하부층 / 주로 1.5mm·2mm 건타입 및 펜타입',
+'진피~근막층 전체 / 모든 카트리지 사용',
+'근육층 / 특수 카트리지'
+],
+ans:1,
+exp:'아이슈링크는 진피 상부/하부층(이마·눈가·입가·목주름)을 타깃으로 하며 주로 1.5mm·2mm 건타입 및 펜타입 카트리지를 사용합니다.',
+cri:'②번 선택'},
+
+{id:114,type:'mc',ch:'유니버스 슈링크',dif:'상',
+text:'울트라슈링크의 준비 절차로 옳은 것은?',
+opts:[
+'마취 없음 / 상온 초음파겔+붓',
+'크림 마취 20분 / 상온 초음파겔+붓 / 필요 시 소독거즈',
+'크림 마취 30분 / 덴서티 전용 겔',
+'접지패드 연결 / 크림 마취 20분'
+],
+ans:1,
+exp:'울트라슈링크 준비: 크림 마취 20분, 상온 초음파겔+붓, 필요 시 소독거즈.',
+cri:'②번 선택'},
+
+{id:115,type:'mc',ch:'유니버스 슈링크',dif:'최상',
+text:'올인원샤인리프팅에서 다른 슈링크 시술과 구별되는 준비물로 옳은 것은?',
+opts:[
+'상온 초음파겔+붓',
+'덴서티 전용 겔',
+'오로라앰플+붓 (슈링크-오로라 앰플: 올인원 샤인 리프팅)',
+'드레싱 밧드'
+],
+ans:2,
+exp:'올인원샤인리프팅은 오로라앰플+붓을 사용하는 것이 특징입니다.',
+cri:'③번 선택'},
+
+{id:116,type:'mc',ch:'유니버스 슈링크',dif:'중상',
+text:'슈링크 시술 후 즉각 효과와 장기 효과로 옳은 것은?',
+opts:[
+'즉각: 없음 / 장기: 6개월 후 콜라겐 생성',
+'즉각: 시술 직후 좌우 얼굴 비교 가능 / 장기: 4주까지 콜라겐 생성 촉진',
+'즉각: 볼륨 형성 / 장기: 1년 이상 유지',
+'즉각: 없음 / 장기: 2주 후 콜라겐 생성'
+],
+ans:1,
+exp:'슈링크는 1회 시술로 직후 즉각적인 좌우 얼굴 비교가 가능하며, 4주까지 콜라겐 생성 촉진을 기대할 수 있습니다.',
+cri:'②번 선택'},
+
+{id:117,type:'mc',ch:'유니버스 슈링크',dif:'상',
+text:'슈링크 시술 전 입속 금속장치 확인이 필요한 이유와 대처법으로 옳은 것은?',
+opts:[
+'금속이 레이저를 반사하기 때문 / 장치 제거 후 시술',
+'HIFU 에너지가 금속에 집중될 수 있기 때문 / 소독거즈를 어금니와 볼 사이에 넣도록 안내',
+'금속이 냉각 효과를 방해하기 때문 / 얼음팩 적용',
+'금속이 초음파를 흡수하기 때문 / 시술 불가'
+],
+ans:1,
+exp:'입속 금속장치(금니·임플란트·교정기 등) 확인 후 필요 시 소독거즈를 어금니와 볼 사이 공간에 넣도록 안내합니다.',
+cri:'②번 선택'},
+
+{id:118,type:'mc',ch:'유니버스 슈링크',dif:'중상',
+text:'슈링크 시술 후 즉시 진료 연결이 필요한 반응으로 옳은 것은?',
+opts:[
+'붓기·붉음증·통증',
+'팁 자국·일시적인 마비',
+'뼈 주위 욱신거림',
+'압통'
+],
+ans:1,
+exp:'슈링크 시술 후 팁 자국이나 일시적인 마비 발생 시 즉시 진료 연결이 필요합니다.',
+cri:'②번 선택'},
+
+{id:119,type:'short',ch:'유니버스 슈링크',dif:'상',
+text:'아이슈링크, 울트라슈링크, 올인원샤인리프팅의 주요 타깃 부위를 각각 쓰시오.',
+ans:['이마·눈가·입가·목주름','양볼·이중턱','얼굴전체+목'],
+exp:'아이슈링크: 진피 상부/하부층(이마·눈가·입가·목주름) / 울트라슈링크: 상부 피하지방층·근막층(양볼·이중턱) / 올인원샤인리프팅: 진피~근막층 전체(600/1000샷 얼굴전체+목)',
+cri:'3가지 타깃 부위 모두 포함 시 만점'},
+
+{id:120,type:'essay',ch:'유니버스 슈링크',dif:'최상',
+text:'얼굴 전체 리프팅과 이중턱 개선을 원하는 고객에게 슈링크 종류별 특징을 비교하여 최적의 시술 계획을 제안하는 내용을 서술하시오.',
+ans:['울트라슈링크','올인원','SMAS','이중턱','근막','콜라겐'],
+exp:'이중턱: 울트라슈링크(3mm·4.5mm, SMAS 리프팅, 4주 간격 3회 이상) / 전체 얼굴: 올인원샤인리프팅(모든 카트리지, 진피~근막층, 오로라앰플 포함) / 병행 시 효과적',
+cri:'울트라슈링크와 올인원샤인리프팅 각각 특징 + 타깃 층 + 시술 간격 포함 시 만점'},
+
+// ===================== 목차 13: 주사시술 공통 (10문항) =====================
+{id:121,type:'mc',ch:'주사시술 공통',dif:'중상',
+text:'무균 조작법의 기본 원칙으로 옳지 않은 것은?',
+opts:[
+'바늘 및 도구 재사용 금지',
+'사용 후 주사기·바늘 즉시 폐기',
+'약물이 남은 경우 동일 바늘로 재사용 가능',
+'바늘·캐뉼라 끝부분은 시술 중에도 깨끗하게 유지'
+],
+ans:2,
+exp:'무균 조작법 원칙: 인체에 사용한 바늘을 약병에 다시 찌르거나 재사용 금지. 추가 약물은 새 주사기로 준비해야 합니다.',
+cri:'③번 선택'},
+
+{id:122,type:'mc',ch:'주사시술 공통',dif:'상',
+text:'바늘 찔림 사고 발생 시 즉시 해야 할 조치로 옳은 것은?',
+opts:[
+'혼자 처리하고 나중에 보고한다',
+'즉시 상급자에게 보고하고 소독·드레싱 등 필요한 조치를 시행한다',
+'물로만 씻고 계속 시술한다',
+'응급실로 바로 간다'
+],
+ans:1,
+exp:'바늘 찔림 사고 발생 시 즉시 상급자에게 보고하고 소독·드레싱 등 필요한 조치를 시행합니다.',
+cri:'②번 선택'},
+
+{id:123,type:'mc',ch:'주사시술 공통',dif:'중상',
+text:'주사 시술 준비 순서로 올바른 것은?',
+opts:[
+'약물 추출 → 고객 이름 확인 → 주사기 준비 → 소독',
+'고객 이름·차트 확인 → 주사기/니들 준비 → 시술 부위 소독 → 약물 추출/MIX → 오염 여부 체크 → 라벨링',
+'라벨링 → 약물 추출 → 고객 확인 → 소독',
+'소독 → 약물 추출 → 고객 확인 → 라벨링'
+],
+ans:1,
+exp:'주사 시술 준비: ①고객 이름·차트 확인 → ②주사기/니들 준비 → ③시술 부위 소독 → ④약물 추출/MIX → ⑤오염 여부 체크 → ⑥라벨링 → ⑦드레싱 밧드 세팅 → ⑧특이사항 전달',
+cri:'②번 선택'},
+
+{id:124,type:'mc',ch:'주사시술 공통',dif:'상',
+text:'주사 시술 후 공통 주의사항으로 옳지 않은 것은?',
+opts:[
+'멍·주사 자국 약 1주일 지속 가능',
+'당일 세안·메이크업 가능',
+'경락은 1주일간 자제',
+'가벼운 스트레칭은 당일 가능'
+],
+ans:3,
+exp:'주사 시술 후 찜질방·사우나·수영장·음주·흡연·경락 1주일 자제를 안내합니다. 스트레칭은 공통 주의사항에 포함되지 않습니다.',
+cri:'④번 선택'},
+
+{id:125,type:'mc',ch:'주사시술 공통',dif:'최상',
+text:'주사 시술 마무리 후 시술 종류에 따라 달리 적용되는 마무리 방법으로 옳은 것은?',
+opts:[
+'모든 주사 시술은 수딩겔로 마무리한다',
+'지혈 확인 후 시술 종류에 따라 듀오덤, 하티손+리비힐 앰플, 또는 관리실 이동 등을 적용한다',
+'모든 주사 시술은 하티손으로 마무리한다',
+'주사 시술 후에는 아무것도 도포하지 않는다'
+],
+ans:1,
+exp:'주사 시술 마무리: 지혈 확인 후 시술 종류에 따라 듀오덤·하티손+리비힐 앰플 또는 관리실 이동 등.',
+cri:'②번 선택'},
+
+{id:126,type:'mc',ch:'주사시술 공통',dif:'중상',
+text:'오염된 도구가 다른 환자에게 사용될 경우 발생할 수 있는 위험으로 옳은 것은?',
+opts:[
+'약물 효과 감소',
+'심각한 감염 발생',
+'시술 통증 증가',
+'기기 오작동'
+],
+ans:1,
+exp:'사용된 바늘에는 미세한 혈액·조직이 묻어 세균 오염 위험이 높으며, 오염된 약물을 다른 환자에게 사용하면 심각한 감염이 발생할 수 있습니다.',
+cri:'②번 선택'},
+
+{id:127,type:'mc',ch:'주사시술 공통',dif:'중상',
+text:'주사 시술 후 고객에게 전달하는 공통 안내 멘트로 옳은 것은?',
+opts:[
+'"멍이나 주사 자국은 1주일 정도 보일 수 있어요. 찜질방·사우나·수영장·음주·흡연·경락은 1주일간 피해 주세요."',
+'"멍은 3일 이내 사라집니다. 당일부터 모든 활동 가능합니다."',
+'"주사 자국은 2주일 지속됩니다. 세안은 48시간 후부터 가능합니다."',
+'"당일 세안은 금지이며, 스크럽은 2주 후부터 가능합니다."'
+],
+ans:0,
+exp:'공통 안내 멘트: "멍이나 주사 자국은 1주일 정도 보일 수 있어요. 당일 세안과 메이크업은 가능하지만, 찜질방·사우나·수영장·음주·흡연·경락은 1주일간 피해 주세요."',
+cri:'①번 선택'},
+
+{id:128,type:'mc',ch:'주사시술 공통',dif:'상',
+text:'무균 조작법에서 바늘·캐뉼라가 바닥에 닿거나 오염된 경우 올바른 조치는?',
+opts:[
+'알코올솜으로 닦아서 재사용',
+'즉시 새 도구로 교체',
+'물로 세척 후 재사용',
+'가열 소독 후 재사용'
+],
+ans:1,
+exp:'바늘·캐뉼라가 바닥에 닿거나 오염된 경우 즉시 새 도구로 교체해야 합니다.',
+cri:'②번 선택'},
+
+{id:129,type:'short',ch:'주사시술 공통',dif:'상',
+text:'무균 조작법의 핵심 원칙 4가지를 쓰시오.',
+ans:['재사용 금지','즉시 폐기','즉시 교체','즉각 보고'],
+exp:'핵심 결론: 사용한 바늘·주사기 즉시 폐기 / 환자 간 도구 재사용 절대 금지 / 오염된 도구 즉시 교체 / 사고 발생 시 즉각 보고',
+cri:'4가지 모두 포함 시 만점'},
+
+{id:130,type:'essay',ch:'주사시술 공통',dif:'최상',
+text:'신입 직원이 보톡스 시술 준비 중 주사기에 약물을 뽑아 놓은 채 고객 응대를 위해 자리를 비웠다. 이 상황의 문제점을 무균 조작법 관점에서 설명하고 올바른 대처 방법을 서술하시오.',
+ans:['TA','3분','폐기','오염','새 주사기'],
+exp:'TA 약물은 뽑은 후 3분 경과 시 폐기 원칙이며, 자리를 비운 사이 오염 가능성이 있습니다. 올바른 대처: 해당 주사기 폐기 후 새 주사기로 재준비. 시술이 바로 진행되지 않을 경우 미리 뽑지 않는 것이 원칙.',
+cri:'오염 위험 설명 + 3분/즉시 폐기 원칙 + 재준비 방법 포함 시 만점'},
+
+// ===================== 목차 14: 주사기 종류 (10문항) =====================
+{id:131,type:'mc',ch:'주사기 종류',dif:'중상',
+text:'0.5cc 일체형 주사기가 사용되는 시술로 옳은 것은?',
+opts:[
+'사각보톡스·종아리보톡스',
+'주름B(이마·미간·눈가)·TA·리도카인·히알라제',
+'컷슬린 인젝션',
+'스킨부스터·판토딜'
+],
+ans:1,
+exp:'0.5cc 일체형 주사기는 주름B·TA·리도카인·히알라제에 사용합니다.',
+cri:'②번 선택'},
+
+{id:132,type:'mc',ch:'주사기 종류',dif:'상',
+text:'3cc 루어락 주사기(분리형 수기)에서 추출 시 사용하는 니들로 옳은 것은?',
+opts:[
+'30G 8mm',
+'34G 4mm',
+'23G 니들(별도 준비)',
+'9Pin 니들'
+],
+ans:2,
+exp:'3cc 루어락 주사기에서 약물 추출 시 23G 니들(별도 준비)을 사용합니다.',
+cri:'③번 선택'},
+
+{id:133,type:'mc',ch:'주사기 종류',dif:'중상',
+text:'스킨부스터·판토딜 시술에 사용하는 주사기 종류로 옳은 것은?',
+opts:[
+'0.5cc 일체형',
+'5cc 루어락',
+'일반 3cc (분리형 기기 / 더마샤인)',
+'1cc 일체형'
+],
+ans:2,
+exp:'스킨부스터·판토딜은 일반 3cc 분리형 기기(더마샤인)를 사용합니다.',
+cri:'③번 선택'},
+
+{id:134,type:'mc',ch:'주사기 종류',dif:'상',
+text:'컷슬린 인젝션(지방주사) 시술 시 사용하는 니들로 옳은 것은?',
+opts:[
+'34G 4mm (진피층)',
+'30G 13mm (근육층)',
+'30G 8mm (지방층)',
+'9Pin 34G'
+],
+ans:2,
+exp:'컷슬린 인젝션은 5cc 루어락 주사기를 사용하며 시술 니들은 30G 8mm(지방층)입니다.',
+cri:'③번 선택'},
+
+{id:135,type:'mc',ch:'주사기 종류',dif:'최상',
+text:'스킨부스터(더마샤인 기기) 사용 시 9Pin 니들의 길이 조절 방법으로 옳은 것은?',
+opts:[
+'고정된 길이로 변경 불가',
+'길이를 돌려서 조절 가능',
+'시술 전 매번 교체',
+'원장 지시에 따라 달리 설정'
+],
+ans:1,
+exp:'더마샤인 기기의 9Pin 니들(34G)은 길이를 돌려서 조절할 수 있습니다.',
+cri:'②번 선택'},
+
+{id:136,type:'mc',ch:'주사기 종류',dif:'중상',
+text:'1cc 일체형 주사기가 사용되는 시술로 옳은 것은?',
+opts:[
+'주름B·TA',
+'사각보톡스(사각B)',
+'컷슬린 인젝션',
+'스킨부스터'
+],
+ans:1,
+exp:'1cc 일체형 주사기는 사각B(사각보톡스)에 사용합니다.',
+cri:'②번 선택'},
+
+{id:137,type:'mc',ch:'주사기 종류',dif:'상',
+text:'스킨보톡스(더모톡신) 시술 시 사용하는 주사기와 니들로 옳은 것은?',
+opts:[
+'0.5cc 일체형 / 30G 13mm',
+'3cc 루어락 / 34G 4mm',
+'5cc 루어락 / 30G 8mm',
+'1cc 일체형 / 23G'
+],
+ans:1,
+exp:'스킨보톡스(더모톡신): 3cc 루어락 주사기(1/2대=1.5cc), 시술 니들 34G 4mm.',
+cri:'②번 선택'},
+
+{id:138,type:'mc',ch:'주사기 종류',dif:'중상',
+text:'일체형 주사기의 특징으로 옳은 것은?',
+opts:[
+'니들과 주사기를 분리하여 사용할 수 있다',
+'니들과 주사기가 분리 불가하며 시술 니들=추출 니들로 사용',
+'기기에 장착하여 자동으로 주입된다',
+'루어락 방식으로 연결된다'
+],
+ans:1,
+exp:'일체형 주사기는 니들+주사기 분리 불가이며, 시술 니들=추출 니들로 사용합니다.',
+cri:'②번 선택'},
+
+{id:139,type:'short',ch:'주사기 종류',dif:'상',
+text:'종아리보톡스 100U 시술 시 필요한 주사기 구성을 쓰시오.',
+ans:['3cc 루어락','1대','30G 13mm'],
+exp:'종아리보톡스 100U: 3cc 루어락 주사기 1대, 시술 니들 30G 13mm.',
+cri:'주사기 종류+용량+니들 모두 기재 시 만점'},
+
+{id:140,type:'essay',ch:'주사기 종류',dif:'최상',
+text:'주름보톡스(이마)와 스킨보톡스(더모톡신)를 같은 날 시술할 때, 각각의 주사기 종류·용량·니들 및 준비 시 유의사항을 비교하여 서술하시오.',
+ans:['0.5cc','34G','3cc','루어락','초록 스티커','라벨링'],
+exp:'주름B: 0.5cc 일체형 X 30 X 1대, 시술 니들=추출 니들 / 더모톡신: 3cc 루어락(1.5cc), 34G 4mm, 초록 스티커 구분 표시 / 두 약물 혼동 방지를 위해 라벨링·스티커 색상 구분 필수.',
+cri:'두 시술 주사기 구성 + 니들 차이 + 초록 스티커 구분 + 혼동 방지 라벨링 언급 시 만점'},
+
+// ===================== 목차 15: 보톡스·더모톡신 (10문항) =====================
+{id:141,type:'mc',ch:'보톡스·더모톡신',dif:'중상',
+text:'보톡스 100U 기준 식염수 희석 비율로 옳은 것은?',
+opts:['식염수 1cc','식염수 2cc','식염수 3cc','식염수 6cc'],
+ans:2,
+exp:'보톡스 100U 기준 식염수 3cc로 희석합니다. 스킨보톡스(더모톡신)는 100U 기준 식염수 6cc.',
+cri:'③번 선택'},
+
+{id:142,type:'mc',ch:'보톡스·더모톡신',dif:'상',
+text:'스킨보톡스(더모톡신)와 일반 보톡스의 희석 비율 차이로 옳은 것은?',
+opts:[
+'더모톡신이 더 진하게 희석(식염수 1cc)',
+'더모톡신이 더 묽게 희석(식염수 6cc)',
+'두 가지 희석 비율이 동일하다',
+'더모톡신은 희석 없이 원액 사용'
+],
+ans:1,
+exp:'일반 보톡스: 100U 기준 식염수 3cc / 더모톡신: 100U 기준 식염수 6cc로 더 묽게 희석합니다.',
+cri:'②번 선택'},
+
+{id:143,type:'mc',ch:'보톡스·더모톡신',dif:'중상',
+text:'보톡스 MIX 시 주의사항으로 옳은 것은?',
+opts:[
+'거품이 생기지 않도록 주의 / 선입선출 원칙 준수 / 직급자만 MIX 가능',
+'빠르게 흔들어 완전히 녹인다',
+'누구나 MIX 가능하다',
+'냉장 보관 없이 상온에서 보관한다'
+],
+ans:0,
+exp:'보톡스 MIX: 거품이 생기지 않도록 주의, 선입선출 원칙 준수, 직급자만 MIX 가능.',
+cri:'①번 선택'},
+
+{id:144,type:'mc',ch:'보톡스·더모톡신',dif:'상',
+text:'주름보톡스(이마) 시술 후 효과 발현 시기와 유지 기간으로 옳은 것은?',
+opts:[
+'즉시 효과 / 1~2개월',
+'1주 후 효과 / 평균 3~4개월',
+'4주 후 효과 / 평균 6개월',
+'2주 후 효과 / 평균 1년'
+],
+ans:1,
+exp:'주름보톡스 효과: 1주 후 효과 발현, 평균 3~4개월 유지.',
+cri:'②번 선택'},
+
+{id:145,type:'mc',ch:'보톡스·더모톡신',dif:'최상',
+text:'사각보톡스(사각B)의 준비 구성으로 옳은 것은?',
+opts:[
+'50 unit / 0.5cc X 30 X 1대',
+'50 unit / 1cc X 70 X 2대',
+'100 unit / 3cc X 1대',
+'12 unit / 0.5cc X 30 X 1대'
+],
+ans:1,
+exp:'사각B: 50 unit, 1cc X 70 X 2대. 효과는 4주 후, 평균 3~6개월 유지.',
+cri:'②번 선택'},
+
+{id:146,type:'mc',ch:'보톡스·더모톡신',dif:'중상',
+text:'더모톡신 시술 후 앰보(ambo) 반응에 대한 설명으로 옳은 것은?',
+opts:[
+'영구적인 부작용이다',
+'약물 흡수 과정에서 생기는 일시적인 피부의 볼록한 부기로 1~2시간 지속',
+'알러지 반응으로 즉시 진료가 필요하다',
+'피부 손상의 신호이다'
+],
+ans:1,
+exp:'앰보(ambo)는 약물 흡수 과정에서 생기는 일시적인 피부의 볼록한 부기로 1~2시간 지속됩니다.',
+cri:'②번 선택'},
+
+{id:147,type:'mc',ch:'보톡스·더모톡신',dif:'상',
+text:'보톡스 마취 방법에서 바디(종아리·승모근) 부위에 사용하는 것으로 옳은 것은?',
+opts:[
+'페이스 쿨러',
+'크림 마취 20분',
+'얼음팩+젖은 수건',
+'리도카인 주사'
+],
+ans:2,
+exp:'바디 보톡스(종아리·승모근)는 얼음팩+젖은 수건으로 냉각 마취합니다. 얼굴은 페이스 쿨러를 사용합니다.',
+cri:'③번 선택'},
+
+{id:148,type:'mc',ch:'보톡스·더모톡신',dif:'중상',
+text:'다한증 보톡스(겨드랑이)의 작용 원리로 옳은 것은?',
+opts:[
+'땀샘을 직접 파괴',
+'신경 말단의 아세틸콜린 방출을 억제하여 땀 분비 감소',
+'혈관을 수축시켜 땀 분비 감소',
+'피지선 억제를 통한 땀 감소'
+],
+ans:1,
+exp:'다한증 보톡스는 신경 말단의 아세틸콜린 방출을 억제하여 땀 분비를 감소시키고 액취증을 완화합니다.',
+cri:'②번 선택'},
+
+{id:149,type:'short',ch:'보톡스·더모톡신',dif:'상',
+text:'더모톡신(스킨보톡스)의 초록색 스티커 구분 이유와 일반 보톡스와의 희석 차이를 쓰시오.',
+ans:['초록 스티커','6cc','3cc','구분'],
+exp:'더모톡신은 초록색 스티커로 일반 보톡스와 구분합니다. 희석: 더모톡신 100U=식염수 6cc / 일반 보톡스 100U=식염수 3cc.',
+cri:'초록 스티커 구분 이유 + 희석 비율 차이 모두 포함 시 정답'},
+
+{id:150,type:'essay',ch:'보톡스·더모톡신',dif:'최상',
+text:'사각보톡스와 종아리보톡스를 같은 날 시술하는 고객에게 각각의 용량·준비 구성·효과 발현 시기·주의사항을 포함하여 안내하는 내용을 서술하시오.',
+ans:['사각','50unit','종아리','100unit','4주','뻐근'],
+exp:'사각B: 50U, 1cc×70×2대, 4주 후 효과, 3~6개월 유지, 뻐근함·과보상 가능 / 종아리B: 100U=3cc 루어락 1대, 4주 후 효과, 3~6개월 유지, 뻐근함·근육통·힘 풀림·피로감 / 근육량에 따라 직급자 용량 판단.',
+cri:'두 시술 용량+준비+효과시기+주의사항 각각 포함 시 만점'},
+
+// ===================== 목차 16: TA (10문항) =====================
+{id:151,type:'mc',ch:'TA',dif:'중상',
+text:'여드름 TA의 시술 간격으로 옳은 것은?',
+opts:['2주 간격','1주 간격','4주 간격','매일'],
+ans:1,
+exp:'여드름 TA는 1주 간격으로 시술합니다.',
+cri:'②번 선택'},
+
+{id:152,type:'mc',ch:'TA',dif:'상',
+text:'켈로이드 TA의 효과와 시술 간격으로 옳은 것은?',
+opts:[
+'색소침착 완화 / 1주 간격',
+'부풀어오름·간지러움 완화 / 2주 간격',
+'흉터 제거 / 4주 간격',
+'감염 예방 / 1주 간격'
+],
+ans:1,
+exp:'켈로이드 TA는 부풀어오름·간지러움 완화 목적으로 2주 간격 시술합니다.',
+cri:'②번 선택'},
+
+{id:153,type:'mc',ch:'TA',dif:'중상',
+text:'TA 시술 준비 시 주사기 수량 기준으로 옳은 것은?',
+opts:[
+'병변 개수에 따라 1~5대',
+'병변 크기에 따라 달라짐',
+'개수나 크기와 상관없이 무조건 1대 준비',
+'원장 지시에 따라 달라짐'
+],
+ans:2,
+exp:'TA 준비: 0.5cc X 50 X 1대. 개수나 크기와 상관없이 무조건 1대 준비합니다.',
+cri:'③번 선택'},
+
+{id:154,type:'mc',ch:'TA',dif:'상',
+text:'TA 약물을 뽑은 후 폐기해야 하는 시간으로 옳은 것은?',
+opts:[
+'10분 경과 시',
+'3분 경과 시',
+'30분 경과 시',
+'1시간 경과 시'
+],
+ans:1,
+exp:'TA 약물을 뽑은 후 3분 경과 시 폐기합니다. 덩어리 형성 시 피부 함몰 위험이 있기 때문입니다.',
+cri:'②번 선택'},
+
+{id:155,type:'mc',ch:'TA',dif:'최상',
+text:'TA 약물 뽑기 전 반드시 해야 하는 행동과 그 이유로 옳은 것은?',
+opts:[
+'냉장 보관 확인 / 성분 보존을 위해',
+'충분히 흔들기 / 약물이 가라앉아 있어 고르게 섞기 위해',
+'약병 소독 / 무균 유지를 위해',
+'레이블 확인 / 약물 종류 구분을 위해'
+],
+ans:1,
+exp:'TA 약물은 뽑기 전 충분히 흔들어 약물이 고르게 섞이도록 합니다.',
+cri:'②번 선택'},
+
+{id:156,type:'mc',ch:'TA',dif:'중상',
+text:'두피 TA의 적응증으로 옳은 것은?',
+opts:[
+'대머리(안드로겐성 탈모) 개선',
+'원형탈모 개선',
+'지루성 피부염 치료',
+'모낭염 치료'
+],
+ans:1,
+exp:'두피 TA는 원형탈모 개선 목적으로 사용하며, 대머리에는 효과가 없습니다.',
+cri:'②번 선택'},
+
+{id:157,type:'mc',ch:'TA',dif:'상',
+text:'TA 시술이 바로 진행되지 않을 경우 올바른 대처로 옳은 것은?',
+opts:[
+'미리 뽑아 냉장 보관한다',
+'미리 뽑지 않고 시술 직전에 준비한다',
+'뽑아 놓고 10분 이내에 사용한다',
+'뽑아 놓고 알코올솜으로 덮어 보관한다'
+],
+ans:1,
+exp:'TA 시술이 바로 진행되지 않을 경우 미리 뽑지 않습니다. 뽑은 후 3분 경과 시 폐기해야 합니다.',
+cri:'②번 선택'},
+
+{id:158,type:'mc',ch:'TA',dif:'중상',
+text:'TA 약물이 덩어리를 형성했을 때 발생할 수 있는 부작용으로 옳은 것은?',
+opts:[
+'색소침착',
+'피부 함몰',
+'감염',
+'출혈'
+],
+ans:1,
+exp:'TA 약물 덩어리 형성 시 피부 함몰 위험이 있습니다. 이것이 3분 경과 시 폐기 원칙의 이유입니다.',
+cri:'②번 선택'},
+
+{id:159,type:'short',ch:'TA',dif:'상',
+text:'TA의 세 가지 적응증과 각각의 시술 간격을 쓰시오.',
+ans:['여드름 TA','1주','두피 TA','켈로이드 TA','2주'],
+exp:'여드름 TA: 1주 간격 / 두피(원형탈모) TA: 2주 간격 / 켈로이드 TA: 2주 간격',
+cri:'3가지 적응증 + 시술 간격 모두 포함 시 만점'},
+
+{id:160,type:'essay',ch:'TA',dif:'최상',
+text:'TA 시술 준비 중 약물을 뽑아 놓고 3분이 지났을 때 올바른 처리 방법과, 다음번에 이런 상황을 방지하기 위한 준비 원칙을 서술하시오.',
+ans:['폐기','3분','덩어리','함몰','시술 직전'],
+exp:'3분 경과 시 즉시 폐기하고 새 주사기로 재준비. 방지 원칙: 시술이 바로 진행되지 않을 경우 미리 뽑지 않고, 충분히 흔든 후 시술 직전에만 약물을 추출합니다.',
+cri:'3분 폐기 원칙 + 덩어리-함몰 위험 + 시술 직전 준비 원칙 포함 시 만점'},
+
+// ===================== 목차 17: 지방주사_컷슬린 (10문항) =====================
+{id:161,type:'mc',ch:'지방주사_컷슬린',dif:'중상',
+text:'컷슬린 인젝션의 주요 작용 기전으로 옳은 것은?',
+opts:[
+'지방세포를 냉각하여 파괴',
+'인슐린을 낮춰 지방세포를 파괴하고 콜라겐 합성 유도',
+'레이저 에너지로 지방을 용해',
+'고주파로 지방층을 가열하여 제거'
+],
+ans:1,
+exp:'컷슬린은 인슐린을 낮춰 지방세포를 파괴하고, 콜라겐 합성을 유도하여 탄력·타이트닝에 도움을 줍니다.',
+cri:'②번 선택'},
+
+{id:162,type:'mc',ch:'지방주사_컷슬린',dif:'상',
+text:'컷슬린 인젝션의 시술 간격과 추천 횟수로 옳은 것은?',
+opts:[
+'1주 간격 10회 이상',
+'2주 간격 5회 이상 추천',
+'4주 간격 3회 이상',
+'1개월 간격 1회'
+],
+ans:1,
+exp:'컷슬린 인젝션은 2주 간격 5회 이상을 추천합니다.',
+cri:'②번 선택'},
+
+{id:163,type:'mc',ch:'지방주사_컷슬린',dif:'중상',
+text:'컷슬린 인젝션 시술 후 나타나는 반응으로 옳은 것은?',
+opts:[
+'즉시 효과 / 멍 없음',
+'3~4주 후 효과 / 열감·붓기·통증 7일 가능',
+'1주 후 효과 / 딱지 형성',
+'2개월 후 효과 / 색소침착'
+],
+ans:1,
+exp:'컷슬린 시술 후 3~4주 후 효과가 나타나며, 열감·붓기·통증이 7일 가능합니다.',
+cri:'②번 선택'},
+
+{id:164,type:'mc',ch:'지방주사_컷슬린',dif:'상',
+text:'컷슬린 인젝션의 장점으로 교육 자료에 명시된 것은?',
+opts:[
+'즉각적인 효과',
+'스테로이드 성분이 없어 부작용 부담이 적음',
+'1회 시술로 영구적 효과',
+'통증이 전혀 없음'
+],
+ans:1,
+exp:'컷슬린은 스테로이드 성분이 없어 부작용 부담이 적으며, 통증 완화 성분도 함유하고 있습니다.',
+cri:'②번 선택'},
+
+{id:165,type:'mc',ch:'지방주사_컷슬린',dif:'최상',
+text:'컷슬린 인젝션의 마취 방법으로 얼굴 시술 시 사용하는 것은?',
+opts:[
+'크림 마취 20분',
+'페이스 쿨러(사용 전 알코올솜 소독)',
+'리도카인 주사',
+'마취 불필요'
+],
+ans:1,
+exp:'컷슬린 인젝션 마취: 냉각 마취로 멍·통증 감소. 얼굴: 페이스 쿨러(사용 전 알코올솜 소독), 바디: 얼음팩+젖은 수건.',
+cri:'②번 선택'},
+
+{id:166,type:'mc',ch:'지방주사_컷슬린',dif:'중상',
+text:'컷슬린 인젝션에 사용하는 주사기와 니들로 옳은 것은?',
+opts:[
+'0.5cc 일체형 / 34G 4mm',
+'3cc 루어락 / 23G',
+'5cc 루어락 / 30G 8mm',
+'1cc 일체형 / 30G 13mm'
+],
+ans:2,
+exp:'컷슬린 인젝션: 5cc 루어락 주사기 X Vial 수대로, 시술 니들 30G 8mm(지방층).',
+cri:'③번 선택'},
+
+{id:167,type:'mc',ch:'지방주사_컷슬린',dif:'상',
+text:'컷슬린의 "독자 개발 성분"이 작용하는 기전으로 교육 자료에 명시된 것은?',
+opts:[
+'지방세포막을 직접 파괴하는 세포독성 성분',
+'몸무게 증가 원인인 인슐린을 낮춰 지방세포를 파괴',
+'대사 속도를 높여 지방을 연소',
+'식욕 억제를 통한 지방 감소'
+],
+ans:1,
+exp:'컷슬린은 독자 개발 성분으로 몸무게 증가 원인인 인슐린을 낮춰 지방세포를 파괴합니다.',
+cri:'②번 선택'},
+
+{id:168,type:'mc',ch:'지방주사_컷슬린',dif:'중상',
+text:'컷슬린이 기존 지방 분해 주사와 구별되는 장점으로 옳은 것은?',
+opts:[
+'즉각적인 볼륨 감소',
+'스테로이드 성분이 없어 부작용 부담이 적고 콜라겐 합성 유도로 탄력에 도움',
+'1회 시술로 완전 제거 가능',
+'통증이 전혀 없음'
+],
+ans:1,
+exp:'스테로이드 성분이 없어 부작용 부담이 적고, 지방세포 파괴 후 콜라겐 합성 유도로 탄력·타이트닝에 도움을 줍니다.',
+cri:'②번 선택'},
+
+{id:169,type:'short',ch:'지방주사_컷슬린',dif:'중상',
+text:'컷슬린 인젝션의 시술 간격, 추천 횟수, 효과 발현 시기를 쓰시오.',
+ans:['2주','5회','3~4주'],
+exp:'컷슬린: 2주 간격 5회 이상 추천, 3~4주 후 효과 발현.',
+cri:'3가지 모두 포함 시 만점'},
+
+{id:170,type:'essay',ch:'지방주사_컷슬린',dif:'최상',
+text:'이중턱 지방 감소를 원하는 고객에게 컷슬린 인젝션을 소개하며 기전, 기대 효과, 시술 계획, 주의사항을 포함하여 상담하는 내용을 서술하시오.',
+ans:['인슐린','지방세포','콜라겐','2주','5회','3~4주','열감','붓기'],
+exp:'기전: 인슐린 저하→지방세포 파괴+콜라겐 합성 / 효과: 3~4주 후, 탄력+타이트닝 / 계획: 2주 간격 5회 이상 / 주의: 열감·붓기·통증 7일 가능, 냉각 마취 적용.',
+cri:'기전+효과+시술 계획+주의사항 4가지 모두 포함 시 만점'},
+
+// ===================== 목차 18: 스킨부스터 (10문항) =====================
+{id:171,type:'mc',ch:'스킨부스터',dif:'중상',
+text:'스킨부스터 시술 시 더모톡신 믹스(뉴럭스) 비율로 옳은 것은?',
+opts:[
+'항상 0.7cc 고정',
+'3cc 미만: 더모톡신 0.7cc / 3cc 이상: 더모톡신 0.3cc',
+'항상 0.3cc 고정',
+'원장 지시에 따라 매번 달리 적용'
+],
+ans:1,
+exp:'더모톡신 믹스: 3cc 미만은 더모톡신 0.7cc 믹스, 3cc 이상은 더모톡신 0.3cc 믹스.',
+cri:'②번 선택'},
+
+{id:172,type:'mc',ch:'스킨부스터',dif:'상',
+text:'리쥬란의 주요 성분과 주요 적응증으로 옳은 것은?',
+opts:[
+'히알루론산 / 수분감·피부톤 개선',
+'PN 2% / 피부 재생·잔주름·탄력, 예민한 피부에 적합',
+'줄기세포 배양액 / 안티에이징',
+'알파알부틴 / 미백·기미 개선'
+],
+ans:1,
+exp:'리쥬란은 PN 2% 스킨부스터(연어 추출 성분 기반)로 피부 재생·잔주름·탄력 개선, 예민한 피부에 적합합니다.',
+cri:'②번 선택'},
+
+{id:173,type:'mc',ch:'스킨부스터',dif:'중상',
+text:'스킨부스터 공통 시술 간격으로 옳은 것은?',
+opts:[
+'1주 간격 10회 이상',
+'2주 간격 5회 이상',
+'4주 간격 5회 이상 권장',
+'6개월 간격 유지'
+],
+ans:2,
+exp:'스킨부스터 공통 간격: 4주 간격으로 5회 이상 권장 (제품·오더에 따라 1~2주 간격 가능).',
+cri:'③번 선택'},
+
+{id:174,type:'mc',ch:'스킨부스터',dif:'상',
+text:'멜라듀스의 주요 성분과 효과로 옳은 것은?',
+opts:[
+'히알루론산 / 수분감',
+'PN 2% / 재생',
+'알파알부틴·글루타치온·비타민C / 미백·기미·색소침착 개선',
+'줄기세포 배양액 / 탄력'
+],
+ans:2,
+exp:'멜라듀스는 알파알부틴·글루타치온·비타민C 등 화이트닝 성분으로 미백·기미·색소침착·멜라닌 억제 효과를 냅니다.',
+cri:'③번 선택'},
+
+{id:175,type:'mc',ch:'스킨부스터',dif:'최상',
+text:'리비콜(콜라겐 스킨부스터)의 효과 단계로 옳은 것은?',
+opts:[
+'즉시 완전한 효과',
+'직후: 볼륨 형성 / 4~12주: 자가 콜라겐 생성·장기적 유지',
+'2주 후: 수분감 / 6주 후: 리프팅',
+'1주 후: 붓기 감소 / 4주 후: 완전한 효과'
+],
+ans:1,
+exp:'리비콜: 직후 볼륨 형성 / 4~12주: 자가 콜라겐 생성, 장기적 유지 (얇고 탄력 없는 피부, 잔주름, 거친 피부결에 적합).',
+cri:'②번 선택'},
+
+{id:176,type:'mc',ch:'스킨부스터',dif:'중상',
+text:'스킨부스터 마무리 방법으로 옳은 것은?',
+opts:[
+'수딩겔 도포',
+'리비힐 앰플 + 하티손',
+'듀오덤 부착',
+'소독만 시행'
+],
+ans:1,
+exp:'스킨부스터 마무리: 리비힐 앰플 + 하티손. 멘트: "미백, 재생에 도움 되는 앰플입니다."',
+cri:'②번 선택'},
+
+{id:177,type:'mc',ch:'스킨부스터',dif:'상',
+text:'엘라비에 리투오/셀르디엠 시술 시 당일 함께 할 수 없는 시술로 옳은 것은?',
+opts:[
+'FX·슈링크 (순차 시술 가능)',
+'동일 부위 필러 시술',
+'피코토닝',
+'보톡스'
+],
+ans:1,
+exp:'엘라비에 리투오/셀르디엠: 당일 동일 부위 필러 시술 불가, 2주 후 가능. FX·슈링크는 당일 순차 시술 가능(레이저→주사 순서).',
+cri:'②번 선택'},
+
+{id:178,type:'mc',ch:'스킨부스터',dif:'중상',
+text:'스킨부스터 시술 후 앰보 반응이 지속되는 시간으로 옳은 것은?',
+opts:[
+'24시간',
+'1~2시간',
+'3~4일',
+'1주일'
+],
+ans:1,
+exp:'스킨부스터 시술 후 앰보(볼록한 부기)는 1~2시간 지속 가능합니다.',
+cri:'②번 선택'},
+
+{id:179,type:'short',ch:'스킨부스터',dif:'상',
+text:'스킨부스터 제품 중 미백·화이트닝 목적의 제품명과 주요 성분을 쓰시오.',
+ans:['멜라듀스','알파알부틴','글루타치온','비타민C'],
+exp:'멜라듀스: 알파알부틴·글루타치온·비타민C 등 화이트닝 성분. 피부톤·기미·색소침착·멜라닌 억제.',
+cri:'멜라듀스 + 성분 2가지 이상 기재 시 만점'},
+
+{id:180,type:'essay',ch:'스킨부스터',dif:'최상',
+text:'피부 재생과 탄력 개선을 원하는 30대 고객에게 리쥬란과 리비콜 중 어느 제품이 더 적합한지 각 제품의 성분·효과·특징을 비교하여 상담하는 내용을 서술하시오.',
+ans:['리쥬란','PN','연어','리비콜','콜라겐','자가','볼륨'],
+exp:'리쥬란: PN 2% 연어 추출 성분, 피부 재생·잔주름·탄력, 예민한 피부에 적합, 통증·앰보 적음 / 리비콜: 콜라겐 직접 주입+자가 콜라겐 생성 유도, 직후 볼륨+4~12주 장기 유지, 얇고 탄력 없는 피부에 강점.',
+cri:'두 제품 성분·효과 비교 + 각 적합 대상 + 추천 근거 포함 시 만점'},
+
+// ===================== 목차 19: 탈모주사_판토딜 (10문항) =====================
+{id:181,type:'mc',ch:'탈모주사_판토딜',dif:'중상',
+text:'판토딜의 주요 구성 성분 중 두피 모낭 재생을 담당하는 것으로 옳은 것은?',
+opts:[
+'더모톡신 믹스',
+'엑소좀',
+'마이크로니들링(9pin)',
+'오메가라이트(PDT RED)'
+],
+ans:1,
+exp:'판토딜의 엑소좀은 두피 모낭을 근본적으로 재생시켜 모낭을 강화합니다.',
+cri:'②번 선택'},
+
+{id:182,type:'mc',ch:'탈모주사_판토딜',dif:'상',
+text:'판토딜 시술 준비 구성으로 옳은 것은?',
+opts:[
+'판토딜 1바이알(5cc) + 더모톡신(뉴럭스) 1cc = 3cc 일반 주사기 × 2대 (총 6cc)',
+'판토딜 2cc + 식염수 3cc = 5cc 루어락 × 1대',
+'판토딜 단독 3cc 주사기 × 1대',
+'판토딜 1cc + 더모톡신 2cc = 0.5cc × 6대'
+],
+ans:0,
+exp:'판토딜 준비: 판토딜 1바이알(5cc) + 더모톡신(뉴럭스) 1cc = 3cc 일반 주사기 × 2대 (총 6cc).',
+cri:'①번 선택'},
+
+{id:183,type:'mc',ch:'탈모주사_판토딜',dif:'중상',
+text:'판토딜 시술 후 모발에 힘이 생기는 효과 발현 시기로 옳은 것은?',
+opts:[
+'1~2주',
+'4~6주',
+'2~3개월',
+'즉시'
+],
+ans:1,
+exp:'판토딜 시술 후 모발에 힘이 생기는 효과는 4~6주에 나타납니다. 두피 염증 완화 효과는 1주.',
+cri:'②번 선택'},
+
+{id:184,type:'mc',ch:'탈모주사_판토딜',dif:'상',
+text:'판토딜에서 더모톡신 믹스가 탈모에 작용하는 기전으로 옳은 것은?',
+opts:[
+'모낭을 파괴하여 탈모 억제',
+'근육 이완 및 혈류 증가로 탈모 진행 억제, 피지 분비 억제',
+'색소 분해로 두피 환경 개선',
+'항생제 작용으로 감염 예방'
+],
+ans:1,
+exp:'더모톡신 믹스는 근육 이완 및 혈류 증가로 탈모 진행을 억제하고 피지 분비를 억제합니다.',
+cri:'②번 선택'},
+
+{id:185,type:'mc',ch:'탈모주사_판토딜',dif:'최상',
+text:'판토딜 시술 후 금지 사항으로 옳은 것은?',
+opts:[
+'당일 머리 감기 금지 / 시술 부위 문지르기 금지 / 염색·파마 1주일 후 가능',
+'시술 부위 문지르거나 자극 금지 / 머리 감기·염색·파마는 다음날부터 가능',
+'48시간 머리 감기 금지 / 염색 1개월 후 가능',
+'시술 부위 마사지 권장 / 당일 세안 가능'
+],
+ans:1,
+exp:'판토딜 시술 후: 시술 부위 문지르거나 자극 주는 행동 금지 / 머리 감기·염색·파마는 다음날부터 가능.',
+cri:'②번 선택'},
+
+{id:186,type:'mc',ch:'탈모주사_판토딜',dif:'중상',
+text:'판토딜 시술 마무리 절차로 옳은 것은?',
+opts:[
+'수딩겔 도포 후 귀가',
+'마취 없음 / 관리실에서 오메가라이트(PDT RED) 15분 진행',
+'크림 마취 20분 / 듀오덤 부착',
+'하티손 도포 후 귀가'
+],
+ans:1,
+exp:'판토딜: 마취 없음(통증 미미), 관리실에서 오메가라이트(PDT RED) 15분 진행.',
+cri:'②번 선택'},
+
+{id:187,type:'mc',ch:'탈모주사_판토딜',dif:'상',
+text:'판토딜에서 오메가라이트(PDT RED)의 역할로 옳은 것은?',
+opts:[
+'두피 색소침착 개선',
+'모낭 줄기세포를 자극',
+'여드름균 살균',
+'혈관 병변 완화'
+],
+ans:1,
+exp:'오메가라이트(PDT RED)는 모낭 줄기세포를 자극하는 역할을 합니다.',
+cri:'②번 선택'},
+
+{id:188,type:'mc',ch:'탈모주사_판토딜',dif:'중상',
+text:'판토딜의 기본 시술 간격으로 옳은 것은?',
+opts:[
+'1주 간격 5회 이상',
+'2주 간격 5회 이상 추천',
+'4주 간격 3회 이상',
+'매일'
+],
+ans:1,
+exp:'판토딜: 2주 간격 5회 이상 추천. 염증 치료 목적인 경우 1주 간격도 가능.',
+cri:'②번 선택'},
+
+{id:189,type:'short',ch:'탈모주사_판토딜',dif:'상',
+text:'판토딜의 4가지 구성 요소와 각각의 역할을 쓰시오.',
+ans:['천연물 복합성분','모발 성장','엑소좀','모낭 재생','더모톡신','혈류 증가','마이크로니들링','진피 주입'],
+exp:'①천연물 복합성분(미녹시딜 유사): 모발 성장 ②엑소좀: 모낭 재생·강화 ③더모톡신 믹스: 근육 이완·혈류 증가·피지 억제 ④마이크로니들링(9pin): 약물 진피 직접 주입',
+cri:'4가지 요소와 역할 모두 포함 시 만점'},
+
+{id:190,type:'essay',ch:'탈모주사_판토딜',dif:'최상',
+text:'초기 탈모로 고민하는 고객에게 판토딜을 권유하는 상담 내용을 시술 원리, 구성 요소, 시술 계획, 효과 발현 시기, 주의사항을 포함하여 서술하시오.',
+ans:['모낭','엑소좀','더모톡신','2주','5회','4~6주','문지르기 금지'],
+exp:'원리: 4가지 복합 성분으로 모낭 재생·혈류 개선 / 구성: 천연물·엑소좀·더모톡신·마이크로니들링 / 계획: 2주 간격 5회 이상, 마무리 PDT RED 15분 / 효과: 모발 힘 4~6주, 염증 1주 / 주의: 문지르기 금지, 다음날부터 머리 감기 가능.',
+cri:'5가지 항목 모두 포함 시 만점'},
+
+// ===================== 목차 20: 필러 (10문항) =====================
+{id:191,type:'mc',ch:'필러',dif:'중상',
+text:'필러 시술의 개념으로 옳은 것은?',
+opts:[
+'표정을 만들 때 생기는 주름을 없애는 시술',
+'무표정일 때 꺼진 부위에 볼륨을 주는 시술',
+'모공을 축소하는 시술',
+'색소침착을 제거하는 시술'
+],
+ans:1,
+exp:'필러는 무표정일 때 꺼진 부위에 볼륨을 주는 시술로 시술 직후 효과가 나타납니다.',
+cri:'②번 선택'},
+
+{id:192,type:'mc',ch:'필러',dif:'상',
+text:'히알루론산(HA) 필러의 장점으로 옳은 것은?',
+opts:[
+'1회 시술로 영구적 효과',
+'히알루론산 성분으로 히알라제로 녹일 수 있음 / 리도카인 함유로 통증 최소화',
+'콜라겐 성분으로 자연스러운 볼륨',
+'스테로이드 성분으로 빠른 흡수'
+],
+ans:1,
+exp:'HA 필러 장점: 히알루론산 성분으로 히알라제로 녹일 수 있음, 리도카인 함유로 통증 최소화.',
+cri:'②번 선택'},
+
+{id:193,type:'mc',ch:'필러',dif:'중상',
+text:'필러 시술이 절대 금지되는 경우로 옳은 것은?',
+opts:[
+'보톡스 시술 이력이 있는 경우',
+'콜라겐·칼슘 성분 필러 또는 보형물 수술 이력이 있는 경우',
+'스킨부스터 시술을 최근에 받은 경우',
+'피부가 건조한 경우'
+],
+ans:1,
+exp:'콜라겐·칼슘 성분 필러 또는 보형물 수술 이력이 있으면 필러 시술이 금지됩니다 (수술적 제거 필요).',
+cri:'②번 선택'},
+
+{id:194,type:'mc',ch:'필러',dif:'상',
+text:'필러 시술 후 괴사 의심 징조 발견 시 올바른 대처로 옳은 것은?',
+opts:[
+'고객에게 "괴사 가능성이 있습니다"라고 직접 안내한다',
+'즉시 내원 유도 후 원장님·직급자 보고 / 고객에게는 "염증반응 확인이 필요해 진료 보겠습니다" 안내',
+'냉찜질 후 다음날 내원 안내',
+'항생제 연고를 바르고 경과를 지켜본다'
+],
+ans:1,
+exp:'괴사 징조 의심 시: 즉시 내원 유도, 원장님·직급자 보고. 고객에게는 괴사 언급 없이 "염증반응 확인이 필요해 진료 보겠습니다" 안내.',
+cri:'②번 선택'},
+
+{id:195,type:'mc',ch:'필러',dif:'최상',
+text:'필러 사진 촬영 기준으로 옳은 것은?',
+opts:[
+'정면 1장만 촬영',
+'시술 전·후 정면·좌우 45도·좌우 90도 각 1장 총 10장 촬영',
+'시술 후만 5장 촬영',
+'정면·좌우 45도 총 6장 촬영'
+],
+ans:1,
+exp:'필러 사진 촬영: 시술 전&후 정면, 좌우 45도, 좌우 90도 5장 촬영 (총 10장).',
+cri:'②번 선택'},
+
+{id:196,type:'mc',ch:'필러',dif:'중상',
+text:'히알라제의 역할과 효과 시간으로 옳은 것은?',
+opts:[
+'콜라겐 필러를 녹이는 주사 / 즉시 효과',
+'히알루론산 성분 필러를 녹이는 주사 / 2~48시간에 걸쳐 녹음',
+'보형물을 용해하는 주사 / 1주일 소요',
+'칼슘 필러를 녹이는 주사 / 3일 소요'
+],
+ans:1,
+exp:'히알라제는 히알루론산 성분 필러를 녹이는 주사로 2~48시간에 걸쳐 녹습니다.',
+cri:'②번 선택'},
+
+{id:197,type:'mc',ch:'필러',dif:'상',
+text:'벨로테로 소프트·볼륨의 유지 기간으로 옳은 것은?',
+opts:[
+'3~6개월',
+'6~12개월',
+'12~24개월',
+'영구적'
+],
+ans:2,
+exp:'벨로테로 소프트·볼륨(수입산)은 12~24개월 유지됩니다.',
+cri:'③번 선택'},
+
+{id:198,type:'mc',ch:'필러',dif:'중상',
+text:'필러 시술 후 몰딩(molding)이 필요한 상황으로 옳은 것은?',
+opts:[
+'붓기가 심한 경우',
+'필러 모양이 울퉁불퉁한 경우',
+'멍이 심한 경우',
+'통증이 심한 경우'
+],
+ans:1,
+exp:'필러 몰딩은 필러 모양이 울퉁불퉁한 경우 1~2주 내 내원하여 진행합니다.',
+cri:'②번 선택'},
+
+{id:199,type:'short',ch:'필러',dif:'상',
+text:'필러 시술 후 즉시 진료 연결이 필요한 3가지 징후를 쓰시오.',
+ans:['피부색과 전혀 다른 색깔 변화','예리한 통증','수포 반응'],
+exp:'즉시 내원 유도 징후: 시술 부위 피부색과 전혀 다른 색깔 변화, 예리한 통증, 수포 반응 발생 시.',
+cri:'3가지 모두 기재 시 만점'},
+
+{id:200,type:'essay',ch:'필러',dif:'최상',
+text:'필러 시술을 처음 받으러 온 고객에게 시술 전 금기 확인사항, 시술 후 주의사항(몰딩·괴사 징조 포함), 사진 촬영 기준을 포함하여 전반적인 안내를 서술하시오.',
+ans:['콜라겐·칼슘','보형물','괴사','색깔 변화','몰딩','10장','1주일'],
+exp:'금기: 콜라겐·칼슘 필러 또는 보형물 수술 이력 확인 / 주의: 멍·붓기 1주일, 시술 부위 압박 금지, 울퉁불퉁 시 1~2주 내 몰딩 가능, 색깔 변화·예리한 통증·수포 즉시 내원 / 사진: 전·후 5방향 총 10장.',
+cri:'금기+주의사항+괴사 징조+몰딩+사진 기준 모두 포함 시 만점'},
+
+];;
+
+// 시험 시작
+function startExam(){
+  var n=$('nm').value.trim(),d=$('dt').value,e=$('em').value.trim();
+  if(!n){alert('이름을 입력해주세요.');return;}
+  if(!d){alert('입사일을 입력해주세요.');return;}
+  if(!e){alert('이메일 주소를 입력해주세요.');return;}
+  cu={name:n,date:d,email:e};
+  $('enm').textContent=n+' 님';
+  buildQ();show('pg1');startTmr();
+}
+
+function buildQ(){
+  var c=$('qcon');c.innerHTML='';
+  QS.forEach(function(q,i){
+    var d=document.createElement('div');d.className='qcard';d.id='qc'+i;
+    var tl=q.type==='mc'?'객관식':q.type==='short'?'단답형':'서술형';
+    var dc=q.dif==='최상'?'bx-top':q.dif==='상'?'bx-hi':'bx-mid';
+    d.innerHTML='<div class="qmeta"><span class="bx '+dc+'">'+q.dif+'</span><span style="color:#ccc;">|</span><span style="color:#aaa;font-size:11px;">'+tl+'</span><span style="color:#ccc;">|</span><span style="color:#aaa;font-size:11px;">'+(i+1)+'/'+QS.length+'번</span></div><div class="qtxt">'+q.text+'</div>';
+    if(q.type==='mc'){
+      q.opts.forEach(function(o,oi){
+        var r=document.createElement('div');r.className='opt';r.dataset.qi=i;r.dataset.oi=oi;
+        r.innerHTML='<span class="onum">'+(oi+1)+'</span><span>'+o+'</span>';
+        r.onclick=function(){selOpt(i,oi);updProg();};
+        d.appendChild(r);
+      });
+    } else if(q.type==='short'){
+      var inp=document.createElement('input');inp.type='text';inp.id='sa'+i;inp.placeholder='답을 입력하세요';inp.style.marginBottom='0';inp.oninput=updProg;d.appendChild(inp);
+    } else {
+      var ta=document.createElement('textarea');ta.id='sa'+i;ta.placeholder='서술형 답변을 작성하세요 (관리자 검토 후 채점됩니다)';ta.oninput=updProg;d.appendChild(ta);
+    }
+    c.appendChild(d);
+  });
+}
+
+function selOpt(qi,oi){
+  document.querySelectorAll('.opt[data-qi="'+qi+'"]').forEach(function(e){e.classList.remove('sel');});
+  document.querySelector('.opt[data-qi="'+qi+'"][data-oi="'+oi+'"]').classList.add('sel');
+}
+
+function updProg(){
+  var ans=0;
+  QS.forEach(function(q,i){
+    if(q.type==='mc'){if(document.querySelector('.opt.sel[data-qi="'+i+'"]'))ans++;}
+    else{var el=$('sa'+i);if(el&&el.value.trim())ans++;}
+  });
+  $('pf').style.width=Math.round(ans/QS.length*100)+'%';
+}
+
+function startTmr(){
+  tLeft=7200;updTmr();
+  tmrI=setInterval(function(){
+    tLeft--;updTmr();
+    if(tLeft<=600)$('tmr').classList.add('warn');
+    if(tLeft<=0){clearInterval(tmrI);doSubmit();}
+  },1000);
+}
+function updTmr(){
+  var m=Math.floor(tLeft/60),s=tLeft%60;
+  $('td').textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+}
+
+function trySubmit(){
+  var un=[];
+  QS.forEach(function(q,i){
+    var ok=false;
+    if(q.type==='mc')ok=!!document.querySelector('.opt.sel[data-qi="'+i+'"]');
+    else{var el=$('sa'+i);ok=!!(el&&el.value.trim());}
+    if(!ok)un.push(i+1);
+  });
+  if(un.length>0){showUN(un);return;}
+  doSubmit();
+}
+
+function showUN(nums){
+  var old=document.getElementById('unpanel');
+  if(old) old.remove();
+  var p=document.createElement('div');
+  p.id='unpanel';
+  p.className='un-panel';
+  var btns=nums.slice(0,25).map(function(n){
+    return '<span class="un-btn" onclick="jumpQ('+n+')">'+n+'번</span>';
+  }).join('');
+  var more=nums.length>25?'<span style="font-size:11px;color:#999;"> 외 '+(nums.length-25)+'개</span>':'';
+  var submitBtn=document.createElement('button');
+  submitBtn.className='btn btn-p';
+  submitBtn.style.cssText='padding:10px;font-size:13px;margin:0;';
+  submitBtn.textContent='그대로 제출';
+  submitBtn.onclick=function(){doSubmit();var el=document.getElementById('unpanel');if(el)el.remove();};
+
+  var closeBtn=document.createElement('button');
+  closeBtn.className='btn btn-g';
+  closeBtn.style.cssText='padding:10px 16px;font-size:13px;margin:0;width:auto;';
+  closeBtn.textContent='닫기';
+  closeBtn.onclick=function(){var el=document.getElementById('unpanel');if(el)el.remove();};
+
+  var btnRow=document.createElement('div');
+  btnRow.style.cssText='display:flex;gap:8px;';
+  btnRow.appendChild(submitBtn);
+  btnRow.appendChild(closeBtn);
+
+  var title=document.createElement('div');
+  title.style.cssText='font-size:13px;font-weight:600;color:#7f1d1d;margin-bottom:8px;';
+  title.textContent='미응답 '+nums.length+'문항 — 번호 클릭 시 해당 문항으로 이동';
+
+  var btnArea=document.createElement('div');
+  btnArea.style.marginBottom='10px';
+  btnArea.innerHTML=btns+more;
+
+  p.appendChild(title);
+  p.appendChild(btnArea);
+  p.appendChild(btnRow);
+  document.getElementById('pg1').appendChild(p);
+}
+
+function jumpQ(n){
+  var el=$('qc'+(n-1));
+  if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid #534AB7';setTimeout(function(){el.style.outline='';},1800);}
+}
+
+function doSubmit(){
+  clearInterval(tmrI);
+  var answers=[],correct=0;
+  QS.forEach(function(q,i){
+    if(q.type==='mc'){
+      var sel=document.querySelector('.opt.sel[data-qi="'+i+'"]');
+      var chosen=sel?parseInt(sel.dataset.oi):-1;
+      var ok=chosen===q.ans;if(ok)correct++;
+      answers.push({type:'mc',chosen:chosen,ok:ok,skipped:chosen===-1});
+    } else {
+      var val=($('sa'+i)||{}).value||'';
+      var ok=q.type==='short'&&q.ans.some(function(a){return val.includes(a);});
+      if(ok)correct++;
+      answers.push({type:q.type,val:val,ok:ok,skipped:val.trim()==='',isEssay:q.type==='essay'});
+    }
+  });
+  var sc=QS.filter(function(q){return q.type!=='essay';}).length;
+  var score=Math.round(correct/sc*100);
+  var rec={id:'rec_'+Date.now(),name:cu.name,email:cu.email,date:cu.date,score:score,correct:correct,total:QS.length,scorable:sc,answers:answers,ts:new Date().toLocaleString('ko-KR'),sent:false};
+  saveRec(rec);showResult(rec);
+}
+
+function showResult(r){
+  $('rn').textContent=r.name+' 님의 결과';
+  $('rm').textContent='입사일 '+r.date+' · '+r.ts;
+  $('rsc').textContent=r.score+'점';
+  $('rco').textContent=r.correct+'개';
+  $('rwr').textContent=(r.scorable-r.correct)+'개';
+  var list=$('rl');list.innerHTML='';
+  var chs=[...new Set(QS.map(function(q){return q.ch;}))];
+  chs.forEach(function(ch){
+    var chQs=QS.map(function(q,i){return{q:q,i:i};}).filter(function(x){return x.q.ch===ch;});
+    var div=document.createElement('div');
+    div.innerHTML='<div style="font-size:11px;color:#aaa;padding:6px 0 3px;font-weight:600;">'+ch+'</div>';
+    chQs.forEach(function(x){
+      var a=r.answers[x.i];
+      var row=document.createElement('div');
+      row.style.cssText='padding:10px 0;border-bottom:1px solid #f5f5f5;';
+      var badge=a.isEssay?'<span class="bx bx-pn">검토 대기</span>':a.skipped?'<span class="bx bx-sk">미응답</span>':a.ok?'<span class="bx bx-ok">정답</span>':'<span class="bx bx-no">오답</span>';
+      var rowHtml='<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:4px;">'+badge+'<span style="color:#bbb;font-size:11px;flex-shrink:0;">'+(x.i+1)+'번</span><span style="font-size:13px;line-height:1.5;">'+x.q.text+'</span></div>';
+      if(x.q.type==='mc'&&!a.skipped&&a.chosen>=0){
+        rowHtml+='<div style="font-size:12px;color:#555;background:#f8f8f8;padding:6px 10px;border-radius:8px;margin-top:4px;">내 답: '+x.q.opts[a.chosen]+'</div>';
+      } else if((x.q.type==='short'||x.q.type==='essay')&&!a.skipped){
+        rowHtml+='<div style="font-size:12px;color:#555;background:#f8f8f8;padding:6px 10px;border-radius:8px;margin-top:4px;">내 답: '+(a.val||'(미작성)')+'</div>';
+      }
+      row.innerHTML=rowHtml;
+      div.appendChild(row);
+    });
+    list.appendChild(div);
+  });
+  show('pg2');
+}
+
+async function saveRec(r){
+  try{
+    await fetch(GAS,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:r.name,email:r.email,join_date:r.date,score:r.score,correct:r.correct,total:r.total,submitted_at:r.ts,answers:r.answers,rec_id:r.id})
+    });
+  }catch(e){console.warn('저장 오류',e);}
+  try{var all=JSON.parse(localStorage.getItem('mp')||'[]');all.unshift(r);localStorage.setItem('mp',JSON.stringify(all.slice(0,300)));}catch(e){}
+}
+
+async function loadRecs(){
+  try{
+    var resp=await fetch(GAS+'?action=list');
+    var data=await resp.json();
+    if(data&&data.records)return data.records.map(function(r){return Object.assign({},r,{ts:r.ts||r.submitted_at,date:r.date||r.join_date});});
+  }catch(e){}
+  try{return JSON.parse(localStorage.getItem('mp')||'[]');}catch(e){return[];}
+}
+
+async function goAdmin(){
+  show('pg3');
+  $('ast').innerHTML='<div style="color:#aaa;font-size:13px;padding:.5rem;">불러오는 중...</div>';
+  var recs=await loadRecs();
+  _recs=recs;
+  var chs=[...new Set(QS.map(function(q){return q.ch;}))];
+  var cohorts=[...new Set(recs.map(function(r){return getCL(r.date);}))].sort();
+  [$('csel')].forEach(function(s){
+    while(s.options.length>1)s.remove(1);
+    cohorts.forEach(function(c){var o=document.createElement('option');o.value=c;o.textContent=c;s.appendChild(o);});
+  });
+  $('akch').innerHTML='<option value="">전체 챕터</option>'+chs.map(function(c){return'<option value="'+c+'">'+c+'</option>';}).join('');
+  rAst();rWR();rDist();rSnd();rAK();
+}
+
+function rAst(){
+  var avg=_recs.length?Math.round(_recs.reduce(function(s,r){return s+r.score;},0)/_recs.length):0;
+  $('ast').innerHTML='<div class="sv"><div class="sl">총 응시자</div><div class="sn">'+_recs.length+'명</div></div><div class="sv"><div class="sl">평균 점수</div><div class="sn">'+avg+'점</div></div><div class="sv"><div class="sl">80점 이상</div><div class="sn">'+_recs.filter(function(r){return r.score>=80;}).length+'명</div></div><div class="sv"><div class="sl">미발송</div><div class="sn" style="color:#dc3545;">'+_recs.filter(function(r){return !r.sent;}).length+'명</div></div>';
+  var tb=$('rtb');
+  if(!_recs.length){tb.innerHTML='<tr><td colspan="5" style="padding:1rem;text-align:center;color:#aaa;font-size:12px;">응시 기록이 없습니다</td></tr>';return;}
+  tb.innerHTML=_recs.map(function(r,ri){return'<tr>'
+      +'<td>'+r.name+'</td>'
+      +'<td style="font-weight:600;">'+r.score+'점</td>'
+      +'<td style="color:#aaa;font-size:11px;">'+r.date+'</td>'
+      +'<td style="color:#aaa;font-size:11px;">'+(r.email||'-')+'</td>'
+      +'<td style="color:#aaa;font-size:11px;">'+r.ts+'</td>'
+      +'<td><button onclick="showDetail('+ri+')" style="padding:4px 10px;font-size:11px;border-radius:6px;border:1px solid #534AB7;background:#F0EEFF;color:#534AB7;cursor:pointer;">답지</button></td>'
+      +'<td><button onclick="delRec('+ri+')" style="padding:4px 10px;font-size:11px;border-radius:6px;border:1px solid #dc3545;background:#fde8e8;color:#dc3545;cursor:pointer;">삭제</button></td>'
+      +'</tr>';}).join('');
+}
+
+function rCohort(){
+  var ch=$('csel').value;
+  var recs=_recs.filter(function(r){return getCL(r.date)===ch;});
+  var el=$('cdet');
+  if(!ch){el.innerHTML='';return;}
+  if(!recs.length){el.innerHTML='<div style="color:#aaa;font-size:12px;">해당 기수 응시 기록이 없습니다.</div>';return;}
+  var avg=Math.round(recs.reduce(function(s,r){return s+r.score;},0)/recs.length);
+  el.innerHTML='<div class="sg" style="grid-template-columns:repeat(2,1fr);"><div class="sv"><div class="sl">응시자</div><div class="sn">'+recs.length+'명</div></div><div class="sv"><div class="sl">평균</div><div class="sn">'+avg+'점</div></div></div>'+recs.map(function(r){return'<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:13px;"><span>'+r.name+'</span><span style="font-weight:600;">'+r.score+'점</span><span class="bx '+(r.sent?'bx-ok':'bx-sk')+'" style="font-size:11px;">'+(r.sent?'발송완료':'미발송')+'</span></div>';}).join('');
+}
+
+function rWR(){
+  var el=$('wrl');
+  if(!_recs.length){el.innerHTML='<div style="color:#aaa;font-size:12px;">데이터가 없습니다.</div>';return;}
+  var ranked=QS.map(function(q,i){
+    if(q.type==='essay')return null;
+    var tot=_recs.filter(function(r){return r.answers&&r.answers[i];}).length;
+    var wc=_recs.filter(function(r){return r.answers&&r.answers[i]&&!r.answers[i].ok;}).length;
+    return{q:q,i:i,wc:wc,pct:tot?Math.round(wc/tot*100):0};
+  }).filter(Boolean).sort(function(a,b){return b.pct-a.pct;}).slice(0,15);
+  el.innerHTML=ranked.map(function(item,rank){return'<div class="br"><span style="width:20px;font-size:11px;color:#aaa;">'+(rank+1)+'</span><span style="width:180px;font-size:11px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">['+item.q.ch.slice(0,5)+'] '+item.q.text.slice(0,18)+'…</span><div class="bg"><div class="bf'+(item.pct>=60?' r':'')+'" style="width:'+item.pct+'%;"></div></div><span style="width:34px;font-size:12px;font-weight:600;color:'+(item.pct>=60?'#dc3545':'#333')+';">'+item.pct+'%</span></div>';}).join('');
+}
+
+function rDist(){
+  var el=$('dist');
+  if(!_recs.length){el.innerHTML='<div style="color:#aaa;font-size:12px;">데이터가 없습니다.</div>';return;}
+  var bands=[{l:'90~100점',f:function(r){return r.score>=90;}},{l:'80~89점',f:function(r){return r.score>=80&&r.score<90;}},{l:'70~79점',f:function(r){return r.score>=70&&r.score<80;}},{l:'60~69점',f:function(r){return r.score>=60&&r.score<70;}},{l:'60점 미만',f:function(r){return r.score<60;}}];
+  el.innerHTML=bands.map(function(b){var n=_recs.filter(b.f).length;return'<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="width:60px;font-size:11px;color:#aaa;text-align:right;">'+b.l+'</span><div style="flex:1;">'+Array(n).fill('<div style="width:9px;height:9px;border-radius:2px;background:#AFA9EC;display:inline-block;margin:1px;"></div>').join('')+'</div><span style="font-size:12px;font-weight:600;min-width:24px;">'+n+'명</span></div>';}).join('');
+}
+
+function rSnd(){
+  var el=$('sndlist');
+  if(!_recs.length){el.innerHTML='<div style="color:#aaa;font-size:12px;padding:.5rem 0;">응시 기록이 없습니다.</div>';return;}
+
+  // 미발송/발송완료 분리
+  var unsent=_recs.filter(function(r){return !r.sent;});
+  var sent=_recs.filter(function(r){return r.sent;});
+
+  var html='';
+
+  // 미발송 목록
+  if(unsent.length){
+    html+='<div style="font-size:12px;font-weight:600;color:#333;margin-bottom:8px;">📤 미발송 ('+unsent.length+'명)</div>';
+    html+='<div style="margin-bottom:4px;"><label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#666;cursor:pointer;padding:6px 0;"><input type="checkbox" id="chkAll" style="width:18px;height:18px;cursor:pointer;" onchange="selAll(this.checked?1:0)"> 전체 선택</label></div>';
+    html+='<div style="border:1px solid #e5e5e5;border-radius:10px;overflow:hidden;margin-bottom:1rem;">';
+    unsent.forEach(function(r,i){
+      var rid=r.id||r.rec_id||'';
+      html+='<label style="display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;background:'+(i%2===0?'#fff':'#f9f9f9')+';border-bottom:1px solid #f0f0f0;">'
+        +'<input type="checkbox" class="sc" data-id="'+rid+'" style="width:18px;height:18px;flex-shrink:0;cursor:pointer;">'
+        +'<div style="flex:1;">'
+        +'<div style="font-size:14px;font-weight:500;color:#333;">'+r.name+'</div>'
+        +'<div style="font-size:12px;color:#aaa;margin-top:2px;">'+(r.email||'-')+'</div>'
+        +'</div>'
+        +'<div style="text-align:right;">'
+        +'<div style="font-size:15px;font-weight:600;color:#333;">'+r.score+'점</div>'
+        +'<div style="font-size:11px;color:#aaa;">'+r.date+'</div>'
+        +'</div>'
+        +'</label>';
+    });
+    html+='</div>';
+  } else {
+    html+='<div style="padding:12px;background:#f0fff4;border-radius:10px;font-size:13px;color:#155724;margin-bottom:1rem;">✓ 미발송 대상자가 없습니다.</div>';
+  }
+
+  // 발송완료 목록
+  if(sent.length){
+    html+='<div style="font-size:12px;font-weight:600;color:#888;margin-bottom:8px;">✅ 발송완료 ('+sent.length+'명)</div>';
+    html+='<div style="border:1px solid #e5e5e5;border-radius:10px;overflow:hidden;">';
+    sent.forEach(function(r,i){
+      html+='<div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:'+(i%2===0?'#fff':'#f9f9f9')+';border-bottom:1px solid #f0f0f0;">'
+        +'<div style="width:18px;height:18px;border-radius:4px;background:#28a745;display:flex;align-items:center;justify-content:center;flex-shrink:0;">'
+        +'<span style="color:#fff;font-size:12px;font-weight:700;">✓</span></div>'
+        +'<div style="flex:1;">'
+        +'<div style="font-size:13px;font-weight:500;color:#666;">'+r.name+'</div>'
+        +'<div style="font-size:11px;color:#aaa;">'+(r.email||'-')+'</div>'
+        +'</div>'
+        +'<div style="font-size:13px;font-weight:500;color:#aaa;">'+r.score+'점</div>'
+        +'</div>';
+    });
+    html+='</div>';
+  }
+
+  el.innerHTML=html;
+}
+
+function selAll(v){document.querySelectorAll('.sc').forEach(function(c){c.checked=!!v;});}
+
+async function doSend(){
+  var sel=[...document.querySelectorAll('.sc:checked')].map(function(c){return c.dataset.id;});
+  if(!sel.length){alert('발송할 대상을 선택해주세요.');return;}
+  var targets=_recs.filter(function(r){return sel.includes(r.id||r.rec_id||'');});
+  var el=$('sndres');
+  el.style.display='block';
+  el.textContent='발송 처리 중... (0/'+targets.length+')';
+  var cnt=0,fail=0;
+  for(var i=0;i<targets.length;i++){
+    var r=targets[i];
+    var body=makeEmailBody(r);
+    try{
+      var resp=await fetch(GAS,{
+        method:'POST',
+        headers:{'Content-Type':'text/plain'},
+        body:JSON.stringify({action:'markSent',rec_id:r.id||r.rec_id,email:r.email,emailBody:body,sentAt:new Date().toLocaleString('ko-KR')})
+      });
+      r.sent=true;cnt++;
+    }catch(e){
+      // CORS 오류 시 no-cors fallback
+      try{
+        await fetch(GAS,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({action:'markSent',rec_id:r.id||r.rec_id,email:r.email,emailBody:body,sentAt:new Date().toLocaleString('ko-KR')})
+        });
+        r.sent=true;cnt++;
+      }catch(e2){fail++;}
+    }
+    el.textContent='발송 처리 중... ('+cnt+'/'+targets.length+')';
+  }
+  var msg=cnt+'명 발송 완료';
+  if(fail>0) msg+=' ('+fail+'명 실패)';
+  el.innerHTML='<div style="padding:10px 12px;background:#d4edda;border-radius:8px;color:#155724;font-weight:500;">✓ '+msg+'</div>';
+  rSnd();rAst();
+}
+
+function rAK(){
+  var cf=$('akch').value,tf=$('akty').value,df=$('akdf').value;
+  var list=QS.filter(function(q){return(!cf||q.ch===cf)&&(!tf||q.type===tf)&&(!df||q.dif===df);});
+  var el=$('akl');
+  if(!list.length){el.innerHTML='<div style="color:#aaa;font-size:12px;">해당 문항이 없습니다.</div>';return;}
+  el.innerHTML=list.map(function(q){
+    var tl=q.type==='mc'?'객관식':q.type==='short'?'단답형':'서술형';
+    var dc=q.dif==='최상'?'bx-top':q.dif==='상'?'bx-hi':'bx-mid';
+    var ah=q.type==='mc'?'<div style="padding:8px 12px;background:#f8f8f8;border-radius:10px;font-size:13px;margin-bottom:6px;"><strong>정답: '+(q.ans+1)+'번</strong> — '+q.opts[q.ans]+'</div><div style="font-size:12px;color:#aaa;margin-bottom:6px;line-height:1.8;">'+q.opts.map(function(o,i){return'<span style="display:block;">'+(i+1)+'. '+o+(i===q.ans?' ✓':'')+'</span>';}).join('')+'</div>':q.type==='short'?'<div style="padding:8px 12px;background:#f8f8f8;border-radius:10px;font-size:13px;margin-bottom:6px;"><strong>정답 키워드:</strong> '+q.ans.join(' / ')+'</div>':'<div style="padding:8px 12px;background:#f8f8f8;border-radius:10px;font-size:13px;margin-bottom:6px;"><strong>핵심 키워드:</strong> '+q.ans.join(' / ')+'<br><span style="color:#aaa;">서술형 — 관리자 직접 채점</span></div>';
+    return'<div style="background:#fff;border-radius:14px;padding:1.25rem;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.07);"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap;"><span class="bx '+dc+'">'+q.dif+'</span><span style="font-size:11px;color:#aaa;">'+tl+' · Q'+q.id+' · '+q.ch+'</span></div><div style="font-size:14px;font-weight:500;margin-bottom:10px;line-height:1.6;color:#1a1a1a;">'+q.text+'</div>'+ah+'<div style="font-size:12px;color:#888;line-height:1.6;"><strong>해설:</strong> '+q.exp+'</div><div style="font-size:12px;color:#888;margin-top:3px;line-height:1.6;"><strong>채점 기준:</strong> '+q.cri+'</div></div>';
+  }).join('');
+}
+
+function swTab(id,el){
+  document.querySelectorAll('.tc').forEach(function(t){t.classList.remove('on');});
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on');});
+  $(id).classList.add('on');el.classList.add('on');
+  if(id==='tb')rCohort();
+  if(id==='tc')rWR();
+  if(id==='td')rDist();
+  if(id==='te')rSnd();
+  if(id==='tf')rAK();
+}
+
+// 답지 상세보기 + 채점
+function showDetail(idx){
+  var r=_recs[idx];
+  if(!r)return;
+  var modal=document.createElement('div');
+  modal.id='detail-modal';
+  modal.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:300;overflow-y:auto;padding:1rem;';
+  var box=document.createElement('div');
+  box.style.cssText='background:#fff;border-radius:16px;padding:1.25rem;max-width:600px;margin:0 auto;margin-bottom:2rem;';
+
+  // 헤더
+  var header=document.createElement('div');
+  header.style.cssText='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;';
+  header.innerHTML='<div>'
+    +'<div style="font-size:16px;font-weight:600;">'+r.name+' 님 답지</div>'
+    +'<div style="font-size:12px;color:#aaa;margin-top:2px;">'+r.ts+' · 현재 '+r.score+'점</div>'
+    +'</div>'
+    +'<button id="detail-close-btn" style="background:#f0f0f0;border:none;border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px;flex-shrink:0;">닫기</button>';
+  box.appendChild(header);
+
+  // 채점 안내
+  var needGrade=QS.some(function(q,i){return (q.type==='short'||q.type==='essay')&&r.answers&&r.answers[i]&&!r.answers[i].skipped;});
+  if(needGrade){
+    var notice=document.createElement('div');
+    notice.style.cssText='background:#FFF3CD;border-radius:10px;padding:10px 14px;font-size:12px;color:#856404;margin-bottom:1rem;';
+    notice.textContent='단답형·서술형 문항을 채점하고 저장 버튼을 눌러주세요.';
+    box.appendChild(notice);
+  }
+
+  // 문항 목록
+  var qList=document.createElement('div');
+  QS.forEach(function(q,i){
+    var a=r.answers?r.answers[i]:null;
+    var div=document.createElement('div');
+    div.style.cssText='padding:12px 0;border-bottom:1px solid #f5f5f5;';
+
+    if(!a){
+      div.innerHTML='<div style="font-size:12px;color:#aaa;">'+(i+1)+'번 — 응답 없음</div>';
+      qList.appendChild(div);return;
+    }
+
+    var isSA=q.type==='short'||q.type==='essay';
+    var statusBadge='';
+    if(q.type==='essay') statusBadge='<span class="bx bx-pn">서술형</span>';
+    else if(q.type==='short') statusBadge='<span class="bx bx-pn">단답형</span>';
+    else if(a.skipped) statusBadge='<span class="bx bx-sk">미응답</span>';
+    else if(a.ok) statusBadge='<span class="bx bx-ok">정답</span>';
+    else statusBadge='<span class="bx bx-no">오답</span>';
+
+    var qHtml='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">'
+      +statusBadge
+      +'<span style="font-size:11px;color:#aaa;">'+(i+1)+'번</span>'
+      +'<span style="font-size:13px;font-weight:500;">'+q.text+'</span>'
+      +'</div>';
+
+    // 객관식 - 선택 보기 표시
+    if(q.type==='mc'){
+      if(a.chosen>=0){
+        qHtml+='<div style="font-size:12px;color:#555;background:#f8f8f8;padding:6px 10px;border-radius:8px;margin-bottom:4px;">선택: '+q.opts[a.chosen]+'</div>';
+        if(!a.ok){
+          qHtml+='<div style="font-size:12px;color:#155724;background:#d4edda;padding:6px 10px;border-radius:8px;">정답: '+q.opts[q.ans]+'</div>';
+        }
+      }
+    }
+
+    // 단답형/서술형 - 답변 + 채점 UI
+    if(isSA){
+      var ansVal=a.val||'(미작성)';
+      qHtml+='<div style="font-size:12px;background:#f8f8f8;padding:8px 12px;border-radius:8px;margin-bottom:6px;line-height:1.6;">'
+        +'<strong>응시자 답변:</strong><br>'+ansVal+'</div>';
+      
+      // 정답 키워드/해설
+      qHtml+='<div style="font-size:12px;background:#e8f4fd;padding:8px 12px;border-radius:8px;margin-bottom:8px;line-height:1.6;">'
+        +'<strong>정답 키워드:</strong> '+q.ans.join(' / ')+'<br>'
+        +'<strong>채점 기준:</strong> '+q.cri+'</div>';
+
+      // 채점 버튼
+      qHtml+='<div style="display:flex;align-items:center;gap:8px;">'
+        +'<span style="font-size:12px;color:#666;">채점:</span>'
+        +'<button class="grade-btn" data-qi="'+i+'" data-val="1" style="padding:5px 12px;font-size:12px;border-radius:8px;border:1.5px solid #28a745;background:'+(a.ok?'#d4edda':'#fff')+';color:#155724;cursor:pointer;font-weight:500;">정답</button>'
+        +'<button class="grade-btn" data-qi="'+i+'" data-val="0" style="padding:5px 12px;font-size:12px;border-radius:8px;border:1.5px solid #dc3545;background:'+(!a.ok&&!a.skipped?'#fde8e8':'#fff')+';color:#721c24;cursor:pointer;font-weight:500;">오답</button>'
+        +'</div>';
+    }
+
+    div.innerHTML=qHtml;
+    qList.appendChild(div);
+  });
+  box.appendChild(qList);
+
+  // 저장 버튼 (단답/서술 있을 때만)
+  if(needGrade){
+    var saveRow=document.createElement('div');
+    saveRow.style.cssText='margin-top:1.25rem;display:flex;gap:8px;align-items:center;';
+    saveRow.innerHTML='<button id="grade-save-btn" class="btn btn-p" style="padding:12px 24px;font-size:14px;margin:0;">채점 저장</button>'
+      +'<span id="grade-msg" style="font-size:12px;color:#534AB7;"></span>';
+    box.appendChild(saveRow);
+  }
+
+  modal.appendChild(box);
+  document.body.appendChild(modal);
+
+  // 닫기
+  document.getElementById('detail-close-btn').onclick=function(){var m=document.getElementById('detail-modal');if(m)m.remove();};
+  modal.onclick=function(e){if(e.target===modal){modal.remove();}};
+
+  // 채점 버튼 클릭
+  document.querySelectorAll('.grade-btn').forEach(function(btn){
+    btn.onclick=function(){
+      var qi=parseInt(this.dataset.qi);
+      var val=parseInt(this.dataset.val);
+      // 같은 문항 버튼 스타일 초기화
+      document.querySelectorAll('.grade-btn[data-qi="'+qi+'"]').forEach(function(b){
+        b.style.background='#fff';
+      });
+      this.style.background=val?'#d4edda':'#fde8e8';
+      // 임시 저장
+      if(!r._grading) r._grading={};
+      r._grading[qi]=val;
+    };
+  });
+
+  // 채점 저장
+  var saveBtn=document.getElementById('grade-save-btn');
+  if(saveBtn){
+    saveBtn.onclick=async function(){
+      if(!r._grading||Object.keys(r._grading).length===0){
+        document.getElementById('grade-msg').textContent='채점할 문항을 선택해주세요.';return;
+      }
+      var msg=document.getElementById('grade-msg');
+      msg.textContent='저장 중...';
+
+      // answers 업데이트
+      var addCorrect=0,subCorrect=0;
+      Object.keys(r._grading).forEach(function(qi){
+        qi=parseInt(qi);
+        var newVal=r._grading[qi];
+        var oldVal=r.answers[qi].ok?1:0;
+        r.answers[qi].ok=!!newVal;
+        if(newVal&&!oldVal) addCorrect++;
+        if(!newVal&&oldVal) subCorrect++;
+      });
+
+      // 점수 재계산
+      var sc=QS.filter(function(q){return q.type!=='essay';}).length;
+      var newCorrect=(r.correct||0)+addCorrect-subCorrect;
+      var newScore=Math.round(newCorrect/sc*100);
+      r.correct=newCorrect;
+      r.score=newScore;
+      r._grading={};
+
+      // GAS에 저장
+      try{
+        await fetch(GAS,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({action:'updateGrade',rec_id:r.id||r.rec_id,score:newScore,correct:newCorrect,answers:r.answers})
+        });
+      }catch(e){}
+      // localStorage 업데이트
+      try{var all=JSON.parse(localStorage.getItem('mp')||'[]');
+        var fi=all.findIndex(function(x){return x.id===r.id;});
+        if(fi>=0){all[fi]=r;localStorage.setItem('mp',JSON.stringify(all));}
+      }catch(e){}
+
+      msg.textContent='✓ 저장 완료! 총점: '+newScore+'점';
+      rAst();
+    };
+  }
+}
+
+// 결과 삭제
+async function delRec(idx){
+  var r=_recs[idx];
+  if(!r)return;
+  if(!confirm(r.name+' 님의 결과를 삭제하시겠습니까?'))return;
+  try{
+    await fetch(GAS,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({action:'deleteRec',rec_id:r.id||r.rec_id})
+    });
+  }catch(e){}
+  // localStorage에서도 삭제
+  try{
+    var all=JSON.parse(localStorage.getItem('mp')||'[]');
+    all=all.filter(function(x){return x.id!==r.id;});
+    localStorage.setItem('mp',JSON.stringify(all));
+  }catch(e){}
+  _recs.splice(idx,1);
+  rAst();
+  alert(r.name+' 님의 결과가 삭제되었습니다.');
+}
+
+function makeEmailBody(r){
+  var sc=r.scorable||r.total;
+  var pct=Math.round(r.score);
+
+  // 문항별 HTML 생성
+  var qRows='';
+  var prevCh='';
+  QS.forEach(function(q,i){
+    var a=r.answers?r.answers[i]:null;
+    if(!a) return;
+
+    if(q.ch!==prevCh){
+      if(prevCh!=='') qRows+='</table><br>';
+      qRows+='<div style="background:#534AB7;color:#fff;padding:8px 14px;font-size:13px;font-weight:600;border-radius:8px 8px 0 0;margin-top:16px;">'+q.ch+'</div>'
+        +'<table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #e5e5e5;border-top:none;">';
+      prevCh=q.ch;
+    }
+
+    var bgColor='#fff';
+    var badge='';
+    if(a.isEssay){bgColor='#EEF2FF';badge='<span style="background:#534AB7;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;">검토대기</span>';}
+    else if(a.skipped){bgColor='#f9f9f9';badge='<span style="background:#aaa;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;">미응답</span>';}
+    else if(a.ok){bgColor='#f0fff4';badge='<span style="background:#28a745;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;">정답 ✓</span>';}
+    else{bgColor='#fff5f5';badge='<span style="background:#dc3545;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;">오답 ✗</span>';}
+
+    var myAns='<span style="color:#aaa;font-size:12px;">미응답</span>';
+    if(q.type==='mc'&&a.chosen>=0) myAns='<span style="color:#333;">'+q.opts[a.chosen]+'</span>';
+    else if((q.type==='short'||q.type==='essay')&&a.val) myAns='<span style="color:#333;">'+a.val+'</span>';
+
+    qRows+='<tr style="background:'+bgColor+';border-bottom:1px solid #e5e5e5;">'
+      +'<td style="padding:10px 14px;width:32px;color:#aaa;font-size:12px;vertical-align:top;">'+(i+1)+'</td>'
+      +'<td style="padding:10px 14px;vertical-align:top;">'
+        +'<div style="font-size:13px;color:#333;margin-bottom:6px;line-height:1.5;">'+q.text+'</div>'
+        +'<div style="font-size:12px;color:#666;">내 답: '+myAns+'</div>'
+      +'</td>'
+      +'<td style="padding:10px 14px;width:90px;text-align:center;vertical-align:top;">'+badge+'</td>'
+      +'</tr>';
+  });
+  if(prevCh!=='') qRows+='</table>';
+
+  var scoreColor=pct>=80?'#28a745':pct>=60?'#fd7e14':'#dc3545';
+
+  var bodyHtml='<!DOCTYPE html><html><body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">'
+    +'<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 16px;">'
+    +'<table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">'
+
+    // 헤더
+    +'<tr><td style="background:#534AB7;border-radius:14px 14px 0 0;padding:28px 32px;text-align:center;">'
+    +'<div style="color:#fff;font-size:22px;font-weight:700;">Maypure<span style="color:#F5A623;">+</span></div>'
+    +'<div style="color:#C7C2F0;font-size:13px;margin-top:4px;">신입교육 시험 결과</div>'
+    +'</td></tr>'
+
+    // 점수 카드
+    +'<tr><td style="background:#fff;padding:28px 32px;border-left:1px solid #e5e5e5;border-right:1px solid #e5e5e5;">'
+    +'<p style="margin:0 0 4px;font-size:15px;color:#333;">안녕하세요, <strong>'+r.name+'</strong>님</p>'
+    +'<p style="margin:0 0 20px;font-size:13px;color:#888;">응시일시: '+r.ts+'</p>'
+    +'<table width="100%" cellpadding="0" cellspacing="0" style="background:#f8f8f8;border-radius:12px;margin-bottom:24px;">'
+    +'<tr>'
+    +'<td style="padding:20px;text-align:center;border-right:1px solid #e5e5e5;">'
+    +'<div style="font-size:36px;font-weight:700;color:'+scoreColor+';">'+pct+'점</div>'
+    +'<div style="font-size:12px;color:#888;margin-top:4px;">총점</div>'
+    +'</td>'
+    +'<td style="padding:20px;text-align:center;border-right:1px solid #e5e5e5;">'
+    +'<div style="font-size:36px;font-weight:700;color:#28a745;">'+r.correct+'</div>'
+    +'<div style="font-size:12px;color:#888;margin-top:4px;">정답</div>'
+    +'</td>'
+    +'<td style="padding:20px;text-align:center;">'
+    +'<div style="font-size:36px;font-weight:700;color:#dc3545;">'+(sc-r.correct)+'</div>'
+    +'<div style="font-size:12px;color:#888;margin-top:4px;">오답</div>'
+    +'</td>'
+    +'</tr></table>'
+
+    // 문항별 결과
+    +'<div style="font-size:14px;font-weight:600;color:#333;margin-bottom:12px;">문항별 결과</div>'
+    +qRows
+
+    // 안내문구
+    +'<div style="margin-top:24px;padding:14px 16px;background:#FFF3CD;border-radius:10px;font-size:12px;color:#856404;line-height:1.6;">'
+    +'※ 서술형 문항은 관리자 검토 후 최종 점수가 반영됩니다.<br>'
+    +'※ 정답 및 해설은 교육 담당자를 통해 확인하세요.'
+    +'</div>'
+    +'</td></tr>'
+
+    // 푸터
+    +'<tr><td style="background:#f0f0f0;border-radius:0 0 14px 14px;padding:16px 32px;text-align:center;">'
+    +'<p style="margin:0;font-size:12px;color:#aaa;">Maypure+ 교육팀</p>'
+    +'</td></tr>'
+
+    +'</table></td></tr></table></body></html>';
+
+  return bodyHtml;
+}
+
+function goHome(){clearInterval(tmrI);show('pg0');}
+</script>
+</body>
+</html>
