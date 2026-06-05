@@ -1,171 +1,231 @@
-:root {
-  --bg: #f6f4ef;
-  --surface: #ffffff;
-  --surface-soft: #fbfaf7;
-  --ink: #22211f;
-  --muted: #76716a;
-  --line: #e9e3da;
-  --primary: #8f6f4f;
-  --primary-strong: #6f5136;
-  --primary-soft: #f2e8dd;
-  --danger: #b54747;
-  --danger-soft: #fff0f0;
-  --success: #257753;
-  --success-soft: #eaf7f0;
-  --warning: #9a6b0f;
-  --warning-soft: #fff6df;
-  --shadow: 0 20px 60px rgba(50, 38, 25, 0.10);
-  --radius-xl: 28px;
-  --radius-lg: 20px;
-  --radius-md: 14px;
-}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maypure+ 신입교육 시험</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <div class="brand-mark">M+</div>
+        <div>
+          <p class="eyebrow">Maypure+</p>
+          <h1>신입교육 시험</h1>
+        </div>
+      </div>
+      <button class="ghost-button" id="adminOpenButton" type="button">관리자</button>
+    </header>
 
-* { box-sizing: border-box; }
-html { min-height: 100%; }
-body {
-  margin: 0;
-  min-height: 100%;
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--ink);
-  background:
-    radial-gradient(circle at top left, rgba(143,111,79,0.18), transparent 32rem),
-    linear-gradient(180deg, #fbfaf7 0%, var(--bg) 100%);
-}
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-button:disabled { cursor: not-allowed; opacity: .55; }
+    <main>
+      <section id="landingView" class="view is-active">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="pill">전범위 평가 · <span data-question-count>0</span>문항 · <span data-duration-label>120</span>분</span>
+            <h2>시험 정보를 입력하고 시작하세요.</h2>
+            <p>제출 후 결과 메일에는 점수 요약과 문항별 선택 번호, 정답/오답 여부가 함께 발송됩니다.</p>
+          </div>
 
-.app-shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding: 28px 0 56px; }
-.topbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 28px; }
-.brand-wrap { display: flex; align-items: center; gap: 14px; }
-.brand-mark { width: 52px; height: 52px; border-radius: 17px; background: var(--ink); color: #fff; display: grid; place-items: center; font-weight: 800; letter-spacing: -.04em; }
-.eyebrow { margin: 0 0 4px; font-size: 13px; font-weight: 700; color: var(--primary); letter-spacing: .08em; text-transform: uppercase; }
-h1, h2, h3, p { margin-top: 0; }
-h1 { margin: 0; font-size: clamp(22px, 3vw, 32px); letter-spacing: -.05em; }
-.view { display: none; }
-.view.is-active { display: block; }
+          <form id="candidateForm" class="candidate-form">
+            <label>
+              <span>이름</span>
+              <input id="candidateName" name="name" type="text" autocomplete="name" placeholder="예: 홍길동" required />
+            </label>
+            <label>
+              <span>입사일</span>
+              <input id="candidateHireDate" name="hireDate" type="date" required />
+            </label>
+            <label>
+              <span>이메일</span>
+              <input id="candidateEmail" name="email" type="email" autocomplete="email" placeholder="결과 수신용 이메일" required />
+            </label>
+            <button class="primary-button" type="submit">시험 시작</button>
+            <p class="form-note">결과 이메일 발송은 Google Apps Script 설정 완료 후 작동합니다.</p>
+          </form>
+        </div>
+      </section>
 
-.hero-card, .result-card, .question-card, .admin-header, .admin-metrics, .tab-panel, .exam-sidebar {
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(233,227,218,.9);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow);
-}
-.hero-card { display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; padding: clamp(28px, 5vw, 56px); min-height: 520px; align-items: center; }
-.hero-copy h2 { font-size: clamp(34px, 6vw, 64px); line-height: 1.02; letter-spacing: -.07em; margin: 22px 0 18px; }
-.hero-copy p { max-width: 520px; color: var(--muted); line-height: 1.75; font-size: 17px; }
-.pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: var(--primary-soft); color: var(--primary-strong); font-weight: 700; font-size: 13px; }
-.candidate-form { background: var(--surface-soft); border: 1px solid var(--line); border-radius: 24px; padding: 24px; display: grid; gap: 16px; }
-label { display: grid; gap: 8px; font-weight: 700; color: var(--ink); }
-label span, label { font-size: 14px; }
-input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 14px; padding: 13px 14px; background: #fff; color: var(--ink); outline: none; transition: border-color .18s, box-shadow .18s; }
-input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(143,111,79,.14); }
-.form-note, .panel-note { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+      <section id="examView" class="view">
+        <div class="exam-layout">
+          <aside class="exam-sidebar">
+            <div class="timer-card">
+              <span>남은 시간</span>
+              <strong id="timerText">120:00</strong>
+            </div>
+            <div class="progress-card">
+              <div class="progress-head">
+                <span>진행률</span>
+                <strong id="progressText">0 / 0</strong>
+              </div>
+              <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+            </div>
+            <div id="questionNav" class="question-nav" aria-label="문항 이동"></div>
+          </aside>
 
-.primary-button, .secondary-button, .ghost-button, .danger-button {
-  border: 0;
-  border-radius: 14px;
-  min-height: 44px;
-  padding: 0 18px;
-  font-weight: 800;
-  transition: transform .16s, box-shadow .16s, background .16s;
-}
-.primary-button { background: var(--ink); color: #fff; box-shadow: 0 12px 26px rgba(34,33,31,.15); }
-.primary-button:hover { transform: translateY(-1px); }
-.secondary-button { background: #fff; color: var(--ink); border: 1px solid var(--line); }
-.ghost-button { background: rgba(255,255,255,.62); color: var(--ink); border: 1px solid var(--line); }
-.danger-button { background: var(--danger); color: #fff; }
+          <section class="question-card">
+            <div class="question-meta">
+              <span id="questionNumber">1번</span>
+              <span id="questionChapter">-</span>
+              <span id="questionDifficulty">-</span>
+            </div>
+            <h2 id="questionText"></h2>
+            <div id="choiceArea" class="choice-area"></div>
+            <div class="question-actions">
+              <button class="secondary-button" id="prevQuestionButton" type="button">이전</button>
+              <button class="secondary-button" id="nextQuestionButton" type="button">다음</button>
+              <button class="danger-button" id="submitExamButton" type="button">제출하기</button>
+            </div>
+          </section>
+        </div>
+      </section>
 
-.exam-layout { display: grid; grid-template-columns: 300px 1fr; gap: 22px; align-items: start; }
-.exam-sidebar { padding: 18px; position: sticky; top: 20px; display: grid; gap: 14px; }
-.timer-card, .progress-card { border: 1px solid var(--line); background: var(--surface-soft); border-radius: 20px; padding: 18px; }
-.timer-card span, .progress-card span { display: block; color: var(--muted); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
-.timer-card strong { font-size: 32px; letter-spacing: -.04em; }
-.progress-head { display: flex; justify-content: space-between; align-items: center; }
-.progress-head strong { font-size: 14px; }
-.progress-track { height: 9px; border-radius: 999px; background: #eee8df; overflow: hidden; }
-.progress-bar { height: 100%; width: 0%; background: var(--primary); transition: width .2s ease; }
-.question-nav { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 420px; overflow: auto; padding-right: 4px; }
-.nav-dot { height: 38px; border-radius: 12px; border: 1px solid var(--line); background: #fff; font-weight: 800; color: var(--muted); }
-.nav-dot.is-current { background: var(--ink); color: #fff; border-color: var(--ink); }
-.nav-dot.is-answered:not(.is-current) { background: var(--primary-soft); color: var(--primary-strong); border-color: #e2cbb5; }
-.question-card { padding: clamp(24px, 4vw, 42px); min-height: 560px; display: flex; flex-direction: column; }
-.question-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-.question-meta span { padding: 7px 10px; border-radius: 999px; background: var(--surface-soft); border: 1px solid var(--line); font-weight: 800; color: var(--muted); font-size: 13px; }
-.question-card h2 { font-size: clamp(24px, 3.2vw, 38px); line-height: 1.35; letter-spacing: -.04em; margin-bottom: 28px; }
-.choice-area { display: grid; gap: 12px; margin-bottom: 28px; }
-.choice-label { display: flex; gap: 13px; align-items: flex-start; padding: 16px; border: 1px solid var(--line); border-radius: 18px; background: #fff; cursor: pointer; transition: border-color .16s, box-shadow .16s, background .16s; }
-.choice-label:hover { border-color: #d8c7b6; box-shadow: 0 10px 24px rgba(50,38,25,.06); }
-.choice-label input { width: 18px; height: 18px; margin: 3px 0 0; flex: 0 0 auto; }
-.choice-number { width: 26px; height: 26px; border-radius: 9px; background: var(--primary-soft); color: var(--primary-strong); display: grid; place-items: center; font-weight: 900; font-size: 13px; flex: 0 0 auto; }
-.short-answer, .essay-answer { min-height: 54px; }
-.essay-answer { min-height: 160px; resize: vertical; }
-.question-actions { margin-top: auto; display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+      <section id="resultView" class="view">
+        <div class="result-card">
+          <div class="result-header">
+            <span class="pill">제출 완료</span>
+            <h2>시험 결과</h2>
+            <p id="emailStatusText">결과 메일 발송 상태를 확인 중입니다.</p>
+          </div>
+          <div class="score-grid">
+            <div><span>점수</span><strong id="scoreText">0점</strong></div>
+            <div><span>정답</span><strong id="correctText">0</strong></div>
+            <div><span>오답</span><strong id="incorrectText">0</strong></div>
+            <div><span>검토</span><strong id="reviewText">0</strong></div>
+          </div>
+          <div class="table-headline">
+            <h3>문항별 결과</h3>
+            <p>학생용 이메일과 동일하게 선택 번호와 정답/오답 여부만 표시합니다.</p>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>문항</th>
+                  <th>내 선택</th>
+                  <th>결과</th>
+                </tr>
+              </thead>
+              <tbody id="resultTableBody"></tbody>
+            </table>
+          </div>
+          <div class="result-actions">
+            <button class="secondary-button" id="downloadResultButton" type="button">결과 JSON 다운로드</button>
+            <button class="primary-button" id="restartButton" type="button">처음으로</button>
+          </div>
+        </div>
+      </section>
 
-.result-card { padding: clamp(24px, 4vw, 42px); }
-.result-header { display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px; }
-.result-header h2, .admin-header h2 { font-size: clamp(28px, 4vw, 44px); letter-spacing: -.05em; margin-bottom: 0; }
-.result-header p, .admin-header p { color: var(--muted); margin: 0; line-height: 1.6; }
-.score-grid, .admin-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
-.score-grid div, .admin-metrics div { background: var(--surface-soft); border: 1px solid var(--line); border-radius: 20px; padding: 18px; }
-.score-grid span, .admin-metrics span { display: block; color: var(--muted); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
-.score-grid strong, .admin-metrics strong { font-size: 28px; letter-spacing: -.04em; }
-.table-headline { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin-bottom: 12px; }
-.table-headline h3 { margin: 0; }
-.table-headline p { margin: 0; color: var(--muted); font-size: 13px; }
-.table-wrap { width: 100%; overflow: auto; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
-table { width: 100%; border-collapse: collapse; min-width: 720px; }
-th, td { padding: 13px 14px; border-bottom: 1px solid var(--line); text-align: left; font-size: 14px; vertical-align: middle; }
-th { background: var(--surface-soft); color: var(--muted); font-weight: 900; white-space: nowrap; }
-tr:last-child td { border-bottom: 0; }
-.status { display: inline-flex; align-items: center; padding: 6px 9px; border-radius: 999px; font-weight: 900; font-size: 12px; }
-.status.correct { background: var(--success-soft); color: var(--success); }
-.status.incorrect { background: var(--danger-soft); color: var(--danger); }
-.status.review { background: var(--warning-soft); color: var(--warning); }
-.result-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+      <section id="adminView" class="view">
+        <div class="admin-header">
+          <div>
+            <span class="pill">관리자 대시보드</span>
+            <h2>응시 기록 관리</h2>
+            <p>브라우저 저장 기록과 Apps Script/Google Sheets 기록을 확인할 수 있습니다.</p>
+          </div>
+          <div class="admin-actions">
+            <button class="secondary-button" id="loadBackendButton" type="button">구글 시트 기록 불러오기</button>
+            <button class="ghost-button" id="adminLogoutButton" type="button">나가기</button>
+          </div>
+        </div>
 
-.admin-header { padding: 26px; display: flex; justify-content: space-between; gap: 18px; align-items: center; margin-bottom: 18px; }
-.admin-actions, .send-toolbar, .filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-.admin-metrics { box-shadow: var(--shadow); border-radius: var(--radius-xl); padding: 0; background: transparent; border: 0; }
-.tabs { display: flex; gap: 8px; overflow: auto; margin: 22px 0 14px; }
-.tab { border: 1px solid var(--line); background: rgba(255,255,255,.75); color: var(--muted); border-radius: 999px; padding: 10px 16px; font-weight: 900; }
-.tab.is-active { background: var(--ink); color: #fff; border-color: var(--ink); }
-.tab-panel { display: none; padding: 18px; box-shadow: none; border-radius: 22px; }
-.tab-panel.is-active { display: block; }
-.send-toolbar { margin-bottom: 12px; }
-.panel-note { margin-bottom: 14px; }
-.filters { margin-bottom: 14px; }
-.filters label { min-width: 180px; }
-.icon-button { width: 34px; height: 34px; border-radius: 11px; border: 1px solid var(--line); background: #fff; color: var(--danger); font-weight: 900; }
-.distribution-chart { display: grid; gap: 12px; }
-.bar-row { display: grid; grid-template-columns: 80px 1fr 60px; gap: 12px; align-items: center; }
-.bar-track { height: 28px; border-radius: 999px; background: var(--surface-soft); overflow: hidden; border: 1px solid var(--line); }
-.bar-fill { height: 100%; background: var(--primary); border-radius: 999px; }
+        <div class="admin-metrics">
+          <div><span>응시자</span><strong id="metricTotal">0</strong></div>
+          <div><span>평균 점수</span><strong id="metricAverage">0점</strong></div>
+          <div><span>최고 점수</span><strong id="metricMax">0점</strong></div>
+          <div><span>메일 발송</span><strong id="metricMail">0</strong></div>
+        </div>
 
-.admin-dialog { border: 0; border-radius: 24px; padding: 0; box-shadow: var(--shadow); width: min(420px, calc(100% - 36px)); }
-.admin-dialog::backdrop { background: rgba(34,33,31,.36); backdrop-filter: blur(3px); }
-.admin-dialog form { padding: 26px; display: grid; gap: 14px; }
-.admin-dialog h3 { margin: 0; font-size: 24px; letter-spacing: -.04em; }
-.admin-dialog p { margin: 0; color: var(--muted); }
-.dialog-actions { display: flex; justify-content: flex-end; gap: 10px; }
-.error-text { color: var(--danger)!important; font-weight: 800; }
-.empty-state { color: var(--muted); padding: 24px; text-align: center; }
-.muted { color: var(--muted); }
+        <div class="tabs" role="tablist">
+          <button class="tab is-active" data-tab="records" type="button">현황</button>
+          <button class="tab" data-tab="cohort" type="button">기수별</button>
+          <button class="tab" data-tab="wrong" type="button">오답순위</button>
+          <button class="tab" data-tab="distribution" type="button">분포</button>
+          <button class="tab" data-tab="send" type="button">발송</button>
+          <button class="tab" data-tab="answers" type="button">답지</button>
+        </div>
 
-@media (max-width: 920px) {
-  .hero-card, .exam-layout { grid-template-columns: 1fr; }
-  .exam-sidebar { position: static; }
-  .question-nav { grid-template-columns: repeat(8, 1fr); max-height: 180px; }
-  .score-grid, .admin-metrics { grid-template-columns: repeat(2, 1fr); }
-  .admin-header { flex-direction: column; align-items: stretch; }
-}
+        <div class="tab-panel is-active" id="recordsPanel">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>이름</th><th>입사일</th><th>이메일</th><th>점수</th><th>응시일시</th><th>메일</th><th>삭제</th></tr></thead>
+              <tbody id="adminRecordsBody"></tbody>
+            </table>
+          </div>
+        </div>
 
-@media (max-width: 560px) {
-  .app-shell { width: min(100% - 24px, 1180px); padding-top: 18px; }
-  .topbar { align-items: flex-start; }
-  .brand-mark { width: 44px; height: 44px; }
-  .hero-card, .result-card, .question-card { border-radius: 22px; padding: 22px; }
-  .question-nav { grid-template-columns: repeat(5, 1fr); }
-  .score-grid, .admin-metrics { grid-template-columns: 1fr; }
-  .table-headline { align-items: flex-start; flex-direction: column; }
-}
+        <div class="tab-panel" id="cohortPanel">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>입사월</th><th>응시자</th><th>평균 점수</th><th>최고 점수</th></tr></thead>
+              <tbody id="cohortBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="wrongPanel">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>순위</th><th>문항</th><th>챕터</th><th>오답 수</th><th>오답률</th></tr></thead>
+              <tbody id="wrongBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="distributionPanel">
+          <div id="distributionChart" class="distribution-chart"></div>
+        </div>
+
+        <div class="tab-panel" id="sendPanel">
+          <div class="send-toolbar">
+            <button class="secondary-button" id="selectAllSendButton" type="button">전체선택</button>
+            <button class="secondary-button" id="clearSendButton" type="button">전체해제</button>
+            <button class="primary-button" id="sendSelectedButton" type="button">선택 결과 메일 발송</button>
+          </div>
+          <p class="panel-note">학생용 메일은 정답 번호를 포함하지 않고, 문항별 선택 번호와 정답/오답 여부만 발송합니다.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>선택</th><th>이름</th><th>이메일</th><th>점수</th><th>응시일시</th></tr></thead>
+              <tbody id="sendBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="answersPanel">
+          <div class="filters">
+            <label>챕터 <select id="filterChapter"><option value="">전체</option></select></label>
+            <label>유형 <select id="filterType"><option value="">전체</option><option value="multiple">객관식</option><option value="short">단답</option><option value="essay">서술</option></select></label>
+            <label>난이도 <select id="filterDifficulty"><option value="">전체</option></select></label>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>문항</th><th>챕터</th><th>유형</th><th>난이도</th><th>정답</th></tr></thead>
+              <tbody id="answerKeyBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="adminDialog" class="admin-dialog">
+    <form method="dialog" id="adminPinForm">
+      <h3>관리자 접근</h3>
+      <p>PIN을 입력하세요.</p>
+      <input id="adminPinInput" type="password" inputmode="numeric" autocomplete="off" placeholder="PIN" />
+      <p id="adminPinError" class="error-text" hidden>PIN이 올바르지 않습니다.</p>
+      <div class="dialog-actions">
+        <button class="secondary-button" value="cancel" type="button" id="adminCancelButton">취소</button>
+        <button class="primary-button" value="default" type="submit">확인</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
